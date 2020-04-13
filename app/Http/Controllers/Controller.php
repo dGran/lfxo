@@ -48,6 +48,7 @@ class Controller extends BaseController
     }
 
     protected function telegram_notification_admin($text) {
+        dd(env('TELEGRAM_ADMIN_CHANNEL_ID'));
 		Telegram::sendMessage([
 		    'chat_id' => env('TELEGRAM_ADMIN_CHANNEL_ID'),
 		    'parse_mode' => 'HTML',
