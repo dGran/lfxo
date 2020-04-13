@@ -3,7 +3,7 @@
 header {
 	position: relative;
 	.top-menu {
-		background: #be0346;
+		background: #0a1217;
 		max-height: 54px;
 		min-height: 54px;
 		padding: 0;
@@ -51,11 +51,11 @@ header {
 						}
 					}
 					.nav-link {
-						border-bottom: 1px solid transparent;
+						border-bottom: .1em solid transparent;
 						color: #fff;
 						padding: 0 .25em;
 						&:hover {
-							border-bottom: 1px solid $gray-300;
+							border-bottom: .1em solid #ffd900;
 							color: #fff;
 						}
 						&.disabled {
@@ -64,7 +64,11 @@ header {
 					}
 					&.current {
 						.nav-link {
-							border-bottom: 1px solid #ffd900;
+							color: #ffd900;
+							pointer-events: none;
+							&:hover {
+								border-bottom: .1em solid transparent;
+							}
 						}
 					}
 				}
@@ -128,7 +132,7 @@ header {
 		}
 	}
 	#menu {
-		background: rgba(53, 63, 72, 0.99);
+		background: #252B31;
 		-webkit-box-shadow: 0px 3px 7px -1px rgba(53,63,72,1);
 		-moz-box-shadow: 0px 3px 7px -1px rgba(53,63,72,1);
 		box-shadow: 0px 3px 7px -1px rgba(53,63,72,1);
@@ -142,13 +146,13 @@ header {
 			.nav {
 				.nav-item {
 					border-left: 4px solid transparent;
-					border-top: 1px solid lighten(#353f48, 7%);
+					border-top: 1px solid lighten(#252B31, 7%);
 					display: block;
 					font-size: 1em;
 					padding: .25em .75em;
 					&:hover {
-						background: lighten(#353f48, 6%);
-						border-left: 4px solid #89be38;
+						background: lighten(#252B31, 6%);
+						border-left: 4px solid #ffd900;
 						.nav-link {
 							i, span {
 								color: #fff;
@@ -211,8 +215,8 @@ header {
 						}
 					}
 					&.current {
-						background: lighten(#353f48, 7%);
-						border-left: 4px solid #89be38;
+						background: lighten(#252B31, 7%);
+						border-left: 4px solid #ffd900;
 						.nav-link {
 							i, span {
 								color: #fff;
@@ -224,7 +228,7 @@ header {
 		}
 	}
 	#user-menu {
-		background: rgba(29, 36, 74, 0.99);
+		background: #252B31;
 		-webkit-box-shadow: 0px 3px 7px -1px rgba(53,63,72,1);
 		-moz-box-shadow: 0px 3px 7px -1px rgba(53,63,72,1);
 		box-shadow: 0px 3px 7px -1px rgba(53,63,72,1);
@@ -235,7 +239,7 @@ header {
 		width: 100%;
 		z-index: 999;
 		.user-menu-header {
-			background: darken(#1D244A, 3%);
+			background: darken(#252B31, 3%);
 			color: #fff;
 			text-align: center;
 		}
@@ -243,23 +247,23 @@ header {
 			.nav {
 				.nav-item {
 					border-left: 4px solid transparent;
-					border-top: 1px solid lighten(#1D244A, 7%);
+					border-top: 1px solid lighten(#252B31, 7%);
 					display: block;
 					font-size: 1em;
 					padding: .25em .75em;
 					&.category {
-						background: darken(#1D244A, 3%);
+						background: darken(#252B31, 3%);
 						color: #90a4ae;
 						font-size: .7em;
 						padding: .75em 1.5em;
 						&:hover {
-							background: darken(#1D244A, 3%);
+							background: darken(#252B31, 3%);
 							border-left: 4px solid transparent;
 						}
 					}
 					&:hover {
-						background: lighten(#1D244A, 6%);
-						border-left: 4px solid #00d4e4;
+						background: lighten(#252B31, 6%);
+						border-left: 4px solid #ffd900;
 						.nav-link {
 							i, span {
 								color: #fff;
@@ -363,8 +367,8 @@ header {
 						}
 					}
 					&.current {
-						background: lighten(#1D244A, 7%);
-						border-left: 4px solid #00d4e4;
+						background: lighten(#252B31, 7%);
+						border-left: 4px solid #ffd900;
 						.nav-link {
 							i, span {
 								color: #fff;

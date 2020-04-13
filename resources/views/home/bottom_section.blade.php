@@ -2,7 +2,7 @@
     <div class="container">
         <div class="clearfix p-0">
             <h3 class="float-left">
-                LPX Web App
+                LFXO Web App
             </h3>
         </div>
     </div>

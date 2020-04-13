@@ -102,7 +102,7 @@ class RegisterController extends Controller
             }
             $profile = new Profile;
             $profile->user_id = $user->id;
-            $avatar = rand(1, 48);
+            $avatar = rand(1, 40);
             $profile->avatar = 'img/avatars/gallery/' . $avatar . '.png';
             $profile->save();
         } else {

@@ -240,10 +240,10 @@
         $(".mark:checked").each(function() {
             ids.push($(this).val());
         });
-        if (www == 'pesdb') {
-            var url = '{{ route("admin.players.link_web_image.many", [":ids", "pesdb"]) }}';
+        if (www == 'fifaindex') {
+            var url = '{{ route("admin.players.link_web_image.many", [":ids", "fifaindex"]) }}';
         } else {
-            var url = '{{ route("admin.players.link_web_image.many", [":ids", "pesmaster"]) }}';
+            var url = '{{ route("admin.players.link_web_image.many", [":ids", "sofifa"]) }}';
         }
         url = url.replace(':ids', ids);
         window.location.href=url;

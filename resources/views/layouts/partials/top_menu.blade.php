@@ -10,7 +10,7 @@
                 <h1 style="position: relative">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <i class="icon-logo"></i>
-                        <span>LigasPesXbox</span>
+                        <span>LigasFifaXbox</span>
                     </a>
 
 {{--                     <div style="position: absolute; top: 35px; left: 26px; font-size: .7em; color: #eeff41">
@@ -28,10 +28,10 @@
                 </nav>
             </div>
             <div class="col user text-right">
-                <div class="btn-group dropright">
+                {{-- <div class="btn-group dropright"> --}}
                     @guest
                         <div class="d-none d-lg-inline-block">
-                            <a class="text-white" href="{{ route('login') }}">Iniciar sesión</a>
+                            <a class="text-white" href="{{ route('login') }}">Inicia sesión</a>
                             <span class="text-white">/</span>
                             <a  class="text-white" href="{{ route('register') }}">Regístrate</a>
                         </div>
@@ -63,7 +63,7 @@
                             </a>
                         @endif
                     @endguest
-                </div>
+                {{-- </div> --}}
             </div>
         </div>
     </div>

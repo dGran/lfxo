@@ -4,7 +4,7 @@
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     <style>
         body{
-            background: #161b35;
+            background: #252B31;
             color: #fff;
         }
     </style>
@@ -16,7 +16,7 @@
             <div class="col-12 col-md-8 py-3">
                 <div class="text-center px-3">
                     <img src="{{ asset('img/login.png') }}" class="py-2">
-                    <h5 class="pt-3" style="color: #00d4e4">
+                    <h5 class="pt-3" style="color: #ffd900">
                         REGISTRO DE NUEVO USUARIO
                     </h5>
                     <span class="d-block">
@@ -31,7 +31,7 @@
                            @csrf
 
                             <div class="form-group">
-                                <label for="name" style="color: #00d4e4;">Nombre de usuario</label>
+                                <label for="name" style="color: #ffd900;">Nombre de usuario</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon0">
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="email" style="color: #00d4e4;">Correo electrónico</label>
+                                <label for="email" style="color: #ffd900;">Correo electrónico</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">@</span>
@@ -63,7 +63,7 @@
                             </div>
 
                            <div class="form-group">
-                                <label for="password" style="color: #00d4e4;">Contraseña</label>
+                                <label for="password" style="color: #ffd900;">Contraseña</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon2">
@@ -81,7 +81,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password-confirm" style="color: #00d4e4;">Confirmar contraseña</label>
+                                <label for="password-confirm" style="color: #ffd900;">Confirmar contraseña</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">

@@ -2,7 +2,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
+    "/css/clubs/clubs.css": "/css/clubs/clubs.css",
     "/css/competition/competition.css": "/css/competition/competition.css",
-    "/css/market/market.css": "/css/market/market.css",
-    "/css/clubs/clubs.css": "/css/clubs/clubs.css"
+    "/css/market/market.css": "/css/market/market.css"
 }

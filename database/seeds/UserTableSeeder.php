@@ -63,23 +63,23 @@ class UserTableSeeder extends Seeder
         // }
 
 
-        $category = TeamCategory::create([
-            'name' => 'Packs',
-            'slug' => str_slug('Packs')
-        ]);
+        // $category = TeamCategory::create([
+        //     'name' => 'Packs',
+        //     'slug' => str_slug('Packs')
+        // ]);
 
-        foreach (range(1,32) as $index) {
-            if ($index < 10) {
-                $pack_num = '0' . $index;
-            } else {
-                $pack_num = $index;
-            }
-            $pack = Team::create([
-                'team_category_id' => 1,
-                'name' => "Pack $pack_num",
-                'logo' => 'img/teams/packs.png',
-                'slug' => str_slug("Pack $pack_num")
-            ]);
-        }
+        // foreach (range(1,32) as $index) {
+        //     if ($index < 10) {
+        //         $pack_num = '0' . $index;
+        //     } else {
+        //         $pack_num = $index;
+        //     }
+        //     $pack = Team::create([
+        //         'team_category_id' => 1,
+        //         'name' => "Pack $pack_num",
+        //         'logo' => 'img/teams/packs.png',
+        //         'slug' => str_slug("Pack $pack_num")
+        //     ]);
+        // }
     }
 }

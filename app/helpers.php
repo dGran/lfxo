@@ -41,11 +41,11 @@ function validateUrl($url)
 }
 
 function pesdb_player_info_path($id) {
-	return "http://pesdb.net/pes2019/?id=" . $id;
+	return "https://www.fifaindex.com/static/FIFA20/images/players/5/" . $id;
 }
 
-function pesdb_player_img_path($id) {
-	return "http://pesdb.net/pes2020/images/players/" . $id . ".png";
+function fifaindex_player_img_path($id) {
+	return "https://www.fifaindex.com/static/FIFA20/images/players/5/" . $id . ".png";
 }
 
 function pesmaster_player_info_path($id) {
@@ -76,8 +76,10 @@ function active_season() {
 }
 
 function user_is_participant($user_id) {
-	if (SeasonParticipant::where('season_id', '=', active_season()->id)->where('user_id', '=', $user_id)->first()) {
-		return true;
+	if (active_season()) {
+		if (SeasonParticipant::where('season_id', '=', active_season()->id)->where('user_id', '=', $user_id)->first()) {
+			return true;
+		}
 	}
 	return false;
 }

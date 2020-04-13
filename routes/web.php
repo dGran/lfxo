@@ -26,10 +26,12 @@ Route::get('/noticias/{type?}', 'HomeController@posts')->name('home.posts');
 Route::get('politica-privacidad', 'HomeController@privacity')->name('privacity');
 Route::get('contacto', 'HomeController@contact')->name('contact');
 Route::post('contacto/enviar', 'HomeController@contactSent')->name('contact.sent');
-Route::get('reglamento', 'HomeController@rules')->name('rules');
 
 // Competitions routes
 Route::middleware('check_active_season')->group(function () {
+
+	Route::get('reglamento', 'HomeController@rules')->name('rules');
+
 	Route::get('competiciones/{season_slug?}', 'CompetitionController@index')->name('competitions');
 	Route::get('competiciones/clasificacion/{season_slug}/{competition_slug}/{phase_slug?}/{group_slug?}', 'CompetitionController@table')->name('competitions.table');
 	Route::get('competiciones/partidos/{season_slug}/{competition_slug}/{phase_slug?}/{group_slug?}', 'CompetitionController@calendar')->name('competitions.calendar');

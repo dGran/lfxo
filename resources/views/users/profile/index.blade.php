@@ -3,7 +3,7 @@
 @section('style')
     <style>
 		.profile-header {
-			background: #353f48;
+			background: #252B31;
 			margin-top: 55px;
 			padding: .75rem .25rem;
 		}

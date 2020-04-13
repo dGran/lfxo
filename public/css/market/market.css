@@ -3,7 +3,7 @@
 }
 
 .market-header {
-  background: #353f48;
+  background: #122938;
   margin-top: 55px;
   padding: .75rem .25rem;
 }
@@ -49,8 +49,8 @@
 }
 
 .market-menu {
-  background: #353f48;
-  border-top: 1px solid #414E5B;
+  background: #122938;
+  border-top: 1px solid #15354A;
 }
 
 .market-menu ul {
@@ -71,12 +71,12 @@
 }
 
 .market-menu ul .item.active a {
-  color: #89be38;
+  color: #ffd900;
   pointer-events: none;
 }
 
 .market-menu ul .item.active a:hover {
-  color: #89be38;
+  color: #ffd900;
 }
 
 .market-menu ul .item a {
@@ -141,7 +141,7 @@
 }
 
 .transfer .header h2 {
-  color: #4ea800;
+  color: #FC0053;
   font-weight: 400;
   font-size: 28px;
   line-height: 1.3em;
@@ -752,7 +752,7 @@
 }
 
 .sale .header h2 {
-  color: #4ea800;
+  color: #FC0053;
   font-weight: 400;
   font-size: 28px;
   line-height: 1.3em;
@@ -1003,7 +1003,7 @@
 }
 
 .search .header h2 {
-  color: #4ea800;
+  color: #FC0053;
   font-weight: 400;
   font-size: 28px;
   line-height: 1.3em;
@@ -1333,7 +1333,7 @@
 }
 
 .teams .header h2 {
-  color: #4ea800;
+  color: #FC0053;
   font-weight: 400;
   font-size: 28px;
   line-height: 1.3em;

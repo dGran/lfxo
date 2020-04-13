@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div id="wrapper" style="background: #222B47">
+    <div id="wrapper" style="background: #171d21">
 
         @include('home.banner')
         {{-- @include('home.countdown') --}}

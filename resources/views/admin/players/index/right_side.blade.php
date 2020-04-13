@@ -5,15 +5,15 @@
     <ul class="list-group border-top mt-3">
         @if ($players->count()>0)
             <li class="list-group-item border-0 px-0">
-                <a href="{{ route('admin.players.link_web_images', 'pesdb') }}" class="link_web_images">
+                <a href="{{ route('admin.players.link_web_images', 'fifaindex') }}" class="link_web_images">
                     <span class="fas fa-images fa-fw mr-1"></span>
-                    <span>Enlazar imágenes (pesdb)</span>
+                    <span>Enlazar imágenes (fifaindex)</span>
                 </a>
             </li>
             <li class="list-group-item border-0 px-0">
-                <a href="{{ route('admin.players.link_web_images', 'pesmaster') }}" class="link_web_images">
+                <a href="{{ route('admin.players.link_web_images', 'sofifa') }}" class="link_web_images">
                     <span class="fas fa-images fa-fw mr-1"></span>
-                    <span>Enlazar imágenes (pesmaster)</span>
+                    <span>Enlazar imágenes (sofifa)</span>
                 </a>
             </li>
             <li class="list-group-item border-0 px-0">

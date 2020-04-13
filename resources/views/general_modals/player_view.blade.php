@@ -165,8 +165,8 @@
 
     <div class="modal-bottom">
         @if ($player->player->game_id)
-            <a target="_blank" href="{{ $player->player->pesdb2020_link() }}">+info en pesdb.net</a>
-            <a target="_blank" href="{{ $player->player->pesmaster2020_link() }}">+info en pesmaster.com</a>
+            <a target="_blank" href="{{ $player->player->fifaindex_link() }}">+info en fifaindex.com</a>
+            {{-- <a target="_blank" href="{{ $player->player->pesmaster2020_link() }}">+info en pesmaster.com</a> --}}
         @endif
     </div>
 

@@ -70,29 +70,32 @@
         {{-- Summernote --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
 
-
     </head>
 
     <body class="d-flex flex-column">
-        <header>
-            @include('layouts.partials.top_menu')
-            @yield('section')
-        </header>
 
-        <main>
-            <div id="app">
-                @include('layouts.partials.flash_message')
-                @yield('content')
-            </div>
-            @yield('modal')
-        </main>
+        <div class="flex-grow-1 flex-shrink-0">
+            <header>
+                @include('layouts.partials.top_menu')
+                @yield('section')
+            </header>
 
-        <footer class="footer">
+            <main>
+                <div id="app">
+                    @include('layouts.partials.flash_message')
+                    @yield('content')
+                </div>
+                @yield('modal')
+            </main>
+        </div>
+
+        <footer class="footer flex-shrink-0">
             <div id="page-loader"><span class="preloader-interior"></span></div>
             @yield('breadcrumb')
             @include('layouts.partials.footer')
             @yield('bottom-fixed')
         </footer>
+
 
         @yield('js')
         <!-- Scripts -->
@@ -100,7 +103,6 @@
 
         <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
         <script>
-
             window.cookieconsent.initialise({
               "palette": {
                 "popup": {
@@ -121,7 +123,6 @@
               }
             });
         </script>
+
     </body>
-
-
 </html>

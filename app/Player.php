@@ -34,20 +34,9 @@ class Player extends Model
     	}
     }
 
-    public function pesdb2019_link() {
-    	return 'http://pesdb.net/pes2019/?id=' . $this->game_id;
-    }
+    public function fifaindex_link() {
+    	return "https://www.fifaindex.com/es/player/" . $this->game_id;
 
-    public function pesdb2020_link() {
-    	return 'http://pesdb.net/pes2020/?id=' . $this->game_id;
-    }
-
-    public function pesmaster2019_link() {
-    	return 'https://www.pesmaster.com/' . str_slug($this->name) . '/pes-2019/player/' . $this->game_id .'/';
-    }
-
-    public function pesmaster2020_link() {
-    	return 'https://www.pesmaster.com/' . str_slug($this->name) . '/pes-2020/player/' . $this->game_id .'/';
     }
 
 	public function scopeName($query, $name)
@@ -123,11 +112,11 @@ class Player extends Model
 		switch ($this->position) {
 		    case ($this->position == "DC") || ($this->position == "SD") || ($this->position == "EI") || ($this->position == "ED"):
 		        return "#be262d";
-		    case ($this->position == "MCD") || ($this->position == "MC") || ($this->position == "MP") || ($this->position == "II") || ($this->position == "ID"):
+		    case ($this->position == "MCD") || ($this->position == "MC") || ($this->position == "MCO") || ($this->position == "MI") || ($this->position == "MD"):
 		        return "#4c9f20";
-		    case ($this->position == "CT") || ($this->position == "LD") || ($this->position == "LI"):
+		    case ($this->position == "DFC") || ($this->position == "CAD") || ($this->position == "CAI") || ($this->position == "LD") || ($this->position == "LI"):
 		        return "#2269d9";
-		    case "PT":
+		    case "PO":
 		        return "#dba00f";
 		}
 	}
@@ -200,11 +189,11 @@ class Player extends Model
 		switch ($this->position) {
 		    case ($this->position == "DC") || ($this->position == "SD") || ($this->position == "EI") || ($this->position == "ED"):
 		        return "img/clubs/dc.png";
-		    case ($this->position == "MCD") || ($this->position == "MC") || ($this->position == "MP") || ($this->position == "II") || ($this->position == "ID"):
+		    case ($this->position == "MCD") || ($this->position == "MC") || ($this->position == "MCO") || ($this->position == "MI") || ($this->position == "MD"):
 		        return "img/clubs/mc.png";
-		    case ($this->position == "CT") || ($this->position == "LD") || ($this->position == "LI"):
+		    case ($this->position == "DFC") || ($this->position == "CAD") || ($this->position == "CAI") || ($this->position == "LD") || ($this->position == "LI"):
 		        return "img/clubs/ct.png";
-		    case "PT":
+		    case "PO":
 		        return "img/clubs/pt.png";
 		}
 	}

@@ -679,21 +679,21 @@ class PlayerController extends Controller
 
     public function linkWebImages($www)
     {
-        if ($www == 'pesdb' || $www == 'pesmaster') {
+        if ($www == 'fifaindex' || $www == 'sofifa') {
             $players = Player::where('game_id', '>', 0)->get();
             foreach ($players as $player) {
+
                 if (!$player->isLocalImg() && $player->game_id) {
-                    if ($www == 'pesdb') {
-                        $new_image = pesdb_player_img_path($player->game_id);
+                    if ($www == 'fifaindex') {
+                        $new_image = fifaindex_player_img_path($player->game_id);
                     } else {
                         $new_image = pesmaster_player_img_path($player->game_id);
                     }
-
                     if (@GetImageSize($new_image)) {
                         \Image::make($new_image)->save('img/players/player_' . $player->id . '.png');
                         $player->img = 'img/players/player_' . $player->id . '.png';
                         $player->save();
-                     }
+                    }
 
                     event(new TableWasUpdated($player, $player->name));
                 }

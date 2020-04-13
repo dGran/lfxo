@@ -2,9 +2,12 @@
 
 @section('style')
     <style>
+    	body {
+    		background: #fff;
+    	}
 		.notifications-header {
-			background: #353f48;
-			margin-top: 55px;
+			background: #252B31;
+			margin-top: 54px;
 			padding: .75rem .25rem;
 		}
 		.notifications-header h3 {
@@ -29,13 +32,10 @@
 
 @section('content')
 	@include('users.notifications.header')
-
-	<div class="wrapper">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					@include('users.notifications.content')
-				</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				@include('users.notifications.content')
 			</div>
 		</div>
 	</div>

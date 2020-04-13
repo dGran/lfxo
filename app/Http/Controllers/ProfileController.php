@@ -16,14 +16,8 @@ class ProfileController extends Controller
     public function edit()
     {
         $avatars = [];
-        for ($i=1; $i < 49; $i++) {
+        for ($i=1; $i < 40; $i++) {
             $avatars[$i] = 'img/avatars/gallery/' . $i . '.png';
-        }
-        for ($i=50; $i < 83; $i++) {
-            $avatars[$i] = 'img/avatars/gallery/' . $i . '.gif';
-        }
-        for ($i=100; $i < 110; $i++) {
-            $avatars[$i] = 'img/avatars/gallery/' . $i . '.jpg';
         }
         $nations = Nation::orderBy('name', 'asc')->get();
 		$profile = auth()->user()->profile()->firstOrNew([]);

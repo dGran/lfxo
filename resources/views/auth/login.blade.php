@@ -4,7 +4,7 @@
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     <style>
         body{
-            background: #161b35;
+            background: #252B31;
             color: #fff;
         }
     </style>
@@ -16,7 +16,7 @@
             <div class="col-12 col-md-8 py-3">
                 <div class="text-center px-3">
                     <img src="{{ asset('img/login.png') }}" class="py-2">
-                    <h4 class="pt-3" style="color: #00d4e4">
+                    <h4 class="pt-3" style="color: #ffd900">
                         MI CUENTA
                     </h4>
                     <span class="d-block">
@@ -39,7 +39,7 @@
                             @csrf
 
                             <div class="form-group">
-                                <label for="email" style="color: #00d4e4;">Correo electrónico</label>
+                                <label for="email" style="color: #ffd900;">Correo electrónico</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">@</span>
@@ -54,7 +54,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password" style="color: #00d4e4;">Contraseña</label>
+                                <label for="password" style="color: #ffd900;">Contraseña</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon2">
@@ -87,8 +87,8 @@
                         </div>
 
                         <div class="text-center mt-4">
-                            <a href="{{ route('register') }}" class="btn" style="background: #ab045e; color: #fff;">
-                                ¿NO TIENES CUENTA?<br>REGÍSTRATE!
+                            <a href="{{ route('register') }}" class="btn" style="background: #ffd900; color: #222; padding: 1em 1.5em">
+                                <small class="mr-2">¿NO TIENES CUENTA?</small>REGÍSTRATE!
                             </a>
                         </div>
                     </div>

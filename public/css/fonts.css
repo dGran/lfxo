@@ -68,6 +68,9 @@ src: local('../fonts/DINPro-Bold'), url('../fonts/DINPro-Bold_13934.woff') forma
 .icon-soccer-player:before {
   content: "\e91b";
 }
+.icon-logo:before {
+  content: "\e913";
+}
 .icon-admin-panel:before {
   content: "\e90e";
 }
@@ -82,9 +85,6 @@ src: local('../fonts/DINPro-Bold'), url('../fonts/DINPro-Bold_13934.woff') forma
 }
 .icon-xbox-controller:before {
   content: "\e912";
-}
-.icon-logo:before {
-  content: "\e913";
 }
 .icon-judge:before {
   content: "\e909";

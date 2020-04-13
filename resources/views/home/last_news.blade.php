@@ -43,13 +43,10 @@
     <div class="row">
         <div class="col-12">
             @if ($posts->count() == 0)
-                <div class="px-2 py-4 text-white">
+                <div class="px-4 py-3 text-white">
                     No existen noticias
                 </div>
             @else
-
-
-
                 <ul style="list-style: none; margin:0; padding: 0;">
                     @foreach ($posts as $post)
                         <li class="py-2 d-block" style="display: table; border-bottom: 1px solid #292C5E">

@@ -11,6 +11,7 @@
 
 .cover-page-container {
     background-image: url('../img/bg1.png');
+/*background-image: url('https://s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2019/09/19064401/FIFA.jpg');*/
     background-position: top center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -44,21 +45,19 @@
 }
 
 .section-title {
-    background: #161b35;
-    border-bottom: 1px solid #292C5E;
-    border-top: 1px solid #292C5E;
+    background: #0a1217;
     padding: 1em .5em;
 }
 .section-title h3 {
-    color: #00d4e4;
-    font-family: 'DINPro-Bold', 'Open Sans', sans-serif;
-    font-size: 18px;
-    font-weight: bold;
+    color: #ffd900;
+    font-family: 'Francois One', 'Mukta', sans-serif;
+    font-size: 16px;
+    /*font-weight: bold;*/
     margin: 0;
     text-transform: uppercase;
 }
 .section-title .navigation-buttons a {
-    color: #00d4e4;
+    color: #faf91e;
     font-size: 12px;
     font-weight: bold;
 }
@@ -67,7 +66,7 @@
     pointer-events: none;
 }
 .section-title .navigation-buttons span {
-    color: #00d4e4;
+    color: #faf91e;
     font-size: 12px;
 }
 
@@ -107,7 +106,7 @@
 	.cover-page-wrap {
 	}
 	.cover-page-container {
-		/*background-image: url(../img/bg_1080.png);*/
+		background-image: url(../img/bg_1080.png);
 	}
     .logos {
     }
