@@ -181,11 +181,11 @@ Route::middleware('auth', 'role:admin')->group(function () {
 	Route::get('/admin/jugadores/exportar/{filename}/{type}/{filterName}/{filterCategory}/{filterTeam}/{filterNation}/{filterPosition}/{order}/{ids?}', 'PlayerController@exportFile')->name('admin.players.export.file');
 	Route::get('/admin/jugadores/acciones/importar', 'PlayerController@importData')->name('admin.players.import.data');
 	Route::post('/admin/jugadores/acciones/importar', 'PlayerController@importDataSave')->name('admin.players.import.data.save');
-	Route::get('/admin/jugadores/acciones/enlazar-imagen/{id}/{www}', 'PlayerController@linkWebImage')->name('admin.players.link_web_image');
-	Route::get('/admin/jugadores/acciones/enlazar-imagen-seleccionados/{ids}/{www}', 'PlayerController@linkWebImageMany')->name('admin.players.link_web_image.many');
+	Route::get('/admin/jugadores/acciones/enlazar-imagen/{id}', 'PlayerController@linkWebImage')->name('admin.players.link_web_image');
+	Route::get('/admin/jugadores/acciones/enlazar-imagen-seleccionados/{ids}', 'PlayerController@linkWebImageMany')->name('admin.players.link_web_image.many');
 	Route::get('/admin/jugadores/acciones/desenlazar_imagen/{id}', 'PlayerController@unlinkWebImage')->name('admin.players.unlink_web_image');
 	Route::get('/admin/jugadores/acciones/desenlazar-imagen-seleccionados/{ids}', 'PlayerController@unlinkWebImageMany')->name('admin.players.unlink_web_image.many');
-	Route::get('/admin/jugadores/acciones/enlazar_imagenes/{www}', 'PlayerController@linkWebImages')->name('admin.players.link_web_images');
+	Route::get('/admin/jugadores/acciones/enlazar_imagenes', 'PlayerController@linkWebImages')->name('admin.players.link_web_images');
 	Route::get('/admin/jugadores/acciones/desenlazar_imagenes', 'PlayerController@unlinkWebImages')->name('admin.players.unlink_web_images');
 
 	//Table Zones

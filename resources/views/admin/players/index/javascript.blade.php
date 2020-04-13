@@ -240,7 +240,7 @@
         $(".mark:checked").each(function() {
             ids.push($(this).val());
         });
-        var url = '{{ route("admin.players.link_web_image.many", [":ids"]) }}';
+        var url = '{{ route("admin.players.link_web_image.many", ":ids") }}';
         url = url.replace(':ids', ids);
         window.location.href=url;
     }
