@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index($type = null)
     {
+        $this->telegram_notification_admin('test');
         $posts = Post::orderBy('created_at', 'desc')->paginate();
         $results = Post::where('type', '=', 'result')->orderBy('created_at', 'desc')->take(10)->get();
         $last_users = User::has('profile')->where('verified', '=', 1)->orderBy('id', 'desc')->take(8)->get();

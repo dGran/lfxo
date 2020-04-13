@@ -1763,7 +1763,7 @@ class MarketController extends Controller
 					$bottom_link = 'https://lpx.es/mercado';
 					$title = "\xF0\x9F\x86\x93Agente libre fichado\xE2\x9D\x97";
 
-					$text = "$title<a href='" . $player->player->pesmaster2020_link() . "'>$player_name</a>\n\n";
+					$text = "$title<a href='" . $player->player->fifaindex_link() . "'>$player_name</a>\n\n";
 					$text .= "    <b>\xF0\x9F\x91\x89 $pTo_team_name ($pTo_user_name) su nuevo destino tras desembolsar \xF0\x9F\x92\xB6 $price mill.</b>\n\n";
 					$text .= "        " . $player->player->name . " (" . $player->player->position . " - Media " . $player->player->overall_rating . ")\n";
 					$text .= "        " . $player->player->nation_name . ", " . $player->player->age . " años\n\n";
@@ -1804,7 +1804,7 @@ class MarketController extends Controller
 							$title = "\xF0\x9F\x94\x9D\xF0\x9F\x92\xB0\xF0\x9F\x92\xB0\xF0\x9F\x94\x9DClausulazo TOP\xE2\x9D\x97";
 							break;
 					}
-					$text = "$title<a href='" . $player->player->pesmaster2020_link() . "'>$player_name</a>\n\n";
+					$text = "$title<a href='" . $player->player->fifaindex_link() . "'>$player_name</a>\n\n";
 					$text .= "    <b>\xF0\x9F\x91\x89 $pTo_team_name ($pTo_user_name)</b>\n";
 					$text .= "    \xF0\x9F\x92\xB6 $money\n\n";
 					$text .= "        " . $player->player->name . " (" . $player->player->position . " - Media " . $player->player->overall_rating . ")\n";
@@ -1834,7 +1834,7 @@ class MarketController extends Controller
 					$agreements_link = 'https://lpx.es/mercado/acuerdos';
 
 					$title = "\xF0\x9F\x92\xB0Acuerdo de venta directa\xE2\x9D\x97";
-					$text = "$title<a href='" . $player->player->pesmaster2020_link() . "'>$player_name</a>\n\n";
+					$text = "$title<a href='" . $player->player->fifaindex_link() . "'>$player_name</a>\n\n";
 					$text .= "    <b>\xF0\x9F\x91\x89 $pTo_team_name ($pTo_user_name)</b>\n";
 					$text .= "    \xF0\x9F\x92\xB6 $money\n\n";
 					$text .= "        " . $player->player->name . " (" . $player->player->position . " - Media " . $player->player->overall_rating . ")\n";
@@ -1864,7 +1864,7 @@ class MarketController extends Controller
 					$agreements_link = 'https://lpx.es/mercado/acuerdos';
 
 					$title = "Acuerdo de intercambio\xE2\x9D\x97";
-					$text = "$title<a href='" . $player->player->pesmaster2020_link() . "'>$player_name</a>\n\n";
+					$text = "$title<a href='" . $player->player->fifaindex_link() . "'>$player_name</a>\n\n";
 					$text .= "    <b>\xF0\x9F\x91\x89 $pTo_team_name ($pTo_user_name)</b>\n\n";
 					$text .= "        " . $player->player->name . " (" . $player->player->position . " - Media " . $player->player->overall_rating . ")\n";
 					$text .= "        " . $player->player->nation_name . ", " . $player->player->age . " años\n\n";
@@ -1891,7 +1891,7 @@ class MarketController extends Controller
 					$agreements_link = 'https://lpx.es/mercado/acuerdos';
 
 					$title = "Acuerdo de cesión\xE2\x9D\x97";
-					$text = "$title<a href='" . $player->player->pesmaster2020_link() . "'>$player_name</a>\n\n";
+					$text = "$title<a href='" . $player->player->fifaindex_link() . "'>$player_name</a>\n\n";
 					$text .= "    <b>\xF0\x9F\x91\x89 $pTo_team_name ($pTo_user_name)</b>\n\n";
 					$text .= "        " . $player->player->name . " (" . $player->player->position . " - Media " . $player->player->overall_rating . ")\n";
 					$text .= "        " . $player->player->nation_name . ", " . $player->player->age . " años\n\n";
@@ -1911,7 +1911,7 @@ class MarketController extends Controller
 					$bottom_link = 'https://lpx.es/mercado';
 					$title = "\xF0\x9F\x9A\xAA\xF0\x9F\x91\x88 Jugador despedido\xE2\x9D\x97";
 
-					$text = "$title<a href='" . $player->player->pesmaster2020_link() . "'>$player_name</a>\n\n";
+					$text = "$title<a href='" . $player->player->fifaindex_link() . "'>$player_name</a>\n\n";
 					$text .= "    <b>$pFrom_team_name ($pFrom_user_name) prescinde de sus servicios y recibe \xF0\x9F\x92\xB6 $price mill.</b>\n\n";
 					$text .= "        " . $player->player->name . " (" . $player->player->position . " - Media " . $player->player->overall_rating . ")\n";
 					$text .= "        " . $player->player->nation_name . ", " . $player->player->age . " años\n\n";
