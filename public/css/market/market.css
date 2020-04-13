@@ -3,8 +3,8 @@
 }
 
 .market-header {
-  background: #122938;
-  margin-top: 55px;
+  background: #252B31;
+  margin-top: 54px;
   padding: .75rem .25rem;
 }
 
@@ -49,12 +49,12 @@
 }
 
 .market-menu {
-  background: #122938;
-  border-top: 1px solid #15354A;
+  background: #252B31;
+  border-top: 1px solid #323a42;
 }
 
 .market-menu ul {
-  padding: 0;
+  padding: .25em 0;
 }
 
 .market-menu ul .item {
@@ -130,23 +130,53 @@
   font-size: 11px !important;
 }
 
+.agreements {
+  background: #f9f9f9;
+}
+
+.agreements .header {
+  background: #EEEEEE;
+  border-bottom: 1px solid #DADADA;
+  padding: .5rem .5rem 1rem .5rem;
+}
+
+.agreements .header h2 {
+  color: #FC0053;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.3em;
+  margin: .5em 0;
+  padding: .25rem 0;
+  text-align: center;
+}
+
+.agreements .header .filters a {
+  background-color: #009bce;
+  border-radius: 1rem;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: .9em;
+  padding: .6em 1.25em;
+}
+
 .transfer {
   background: #f9f9f9;
 }
 
 .transfer .header {
   background: #EEEEEE;
-  border-bottom: 1px solid #f1eff3;
+  border-bottom: 1px solid #DADADA;
   padding: .5rem .5rem 1rem .5rem;
 }
 
 .transfer .header h2 {
   color: #FC0053;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.3em;
   margin: .5em 0;
   padding: .25rem 0;
+  text-align: center;
 }
 
 .transfer .header .filters a {
@@ -746,18 +776,19 @@
 }
 
 .sale .header {
-  background: #F2F2F2;
-  border-bottom: 1px solid #f1eff3;
+  background: #EEEEEE;
+  border-bottom: 1px solid #DADADA;
   padding: .5rem .5rem 1rem .5rem;
 }
 
 .sale .header h2 {
   color: #FC0053;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.3em;
   margin: .5em 0;
   padding: .25rem 0;
+  text-align: center;
 }
 
 .sale .header .filters a {
@@ -998,17 +1029,18 @@
 
 .search .header {
   background: #EEEEEE;
-  border-bottom: 1px solid #f1eff3;
+  border-bottom: 1px solid #DADADA;
   padding: .5rem .5rem 1rem .5rem;
 }
 
 .search .header h2 {
   color: #FC0053;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.3em;
   margin: .5em 0;
   padding: .25rem 0;
+  text-align: center;
 }
 
 .search .header .filters a {
@@ -1327,18 +1359,19 @@
 }
 
 .teams .header {
-  background: #F2F2F2;
-  border-bottom: 1px solid #f1eff3;
+  background: #EEEEEE;
+  border-bottom: 1px solid #DADADA;
   padding: .5rem .5rem 1rem .5rem;
 }
 
 .teams .header h2 {
   color: #FC0053;
   font-weight: 400;
-  font-size: 28px;
+  font-size: 24px;
   line-height: 1.3em;
   margin: .5em 0;
   padding: .25rem 0;
+  text-align: center;
 }
 
 .teams .content .item {
@@ -2132,6 +2165,10 @@
   }
 
   .my-team .header .logo {
+    margin-left: 0;
+  }
+
+  .negotiations .header .logo {
     margin-left: 0;
   }
 

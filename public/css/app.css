@@ -11509,7 +11509,7 @@ header .section .match .visitor .participant {
 }
 
 .footer .navigator {
-  background: #0a1217;
+  background: #252B31;
   padding: 1em 0;
 }
 
@@ -11558,7 +11558,7 @@ header .section .match .visitor .participant {
 
 .footer .corporate {
   background: #252B31;
-  border-top: 1px solid #343d45;
+  border-top: 1px solid #323a42;
   padding: 1em 0;
 }
 
@@ -11578,7 +11578,7 @@ header .section .match .visitor .participant {
 }
 
 .footer .corporate .cookies {
-  border-top: 1px solid #343d45;
+  border-top: 1px solid #323a42;
   font-size: .9em;
   margin: 1em 0 0 0;
   padding: 1em 0;
@@ -11586,7 +11586,7 @@ header .section .match .visitor .participant {
 }
 
 .footer .corporate .legal {
-  border-top: 1px solid #343d45;
+  border-top: 1px solid #323a42;
   text-align: center;
 }
 
@@ -11621,8 +11621,8 @@ header .section .match .visitor .participant {
 }
 
 .footer .bottom-fixed {
-  background: #252B31;
-  border-top: 1px solid #343d45;
+  background: #0a1217;
+  border-top: 1px solid #252B31;
   bottom: 0;
   padding: .25em 0;
   position: fixed;

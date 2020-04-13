@@ -2,7 +2,7 @@
 
 	<div class="header">
 		<div class="container">
-			<h2 class="text-center">
+			<h2>
 				Lista de seguimiento
 			</h2>
 			<div class="filters text-center p-2">
@@ -11,7 +11,7 @@
 					Filtros
 				</a>
 			</div>
-		</div> {{-- container --}}
+		</div>
 	</div> {{-- header --}}
 
 	<div class="container">

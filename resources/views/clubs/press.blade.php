@@ -8,7 +8,7 @@
 
 	@include('clubs.partials.header')
 
-	<div class="wrapper">
+	<div class="wrapper" style="background: #f9f9f9">
 		@include('clubs.press.data')
 	</div>
 

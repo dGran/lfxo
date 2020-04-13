@@ -39,17 +39,18 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            @if ($posts->count() == 0)
-                <div class="px-4 py-3 text-white">
-                    No existen noticias
-                </div>
-            @else
-                <ul style="list-style: none; margin:0; padding: 0;">
-                    @foreach ($posts as $post)
-                        <li class="py-2 d-block" style="display: table; border-bottom: 1px solid #292C5E">
+
+<div class="row">
+    <div class="col-12">
+        @if ($posts->count() == 0)
+            <div class="px-4 py-3 text-white">
+                No existen noticias
+            </div>
+        @else
+            <ul style="list-style: none; margin:0; padding: 0; border-bottom: 1px solid #0a1217">
+                @foreach ($posts as $post)
+                    <li class="py-2 d-block" style="display: table; border-top: 1px solid #0a1217">
+                        <div class="container">
                             @if ($post->transfer_id || $post->match_id || $post->press_id)
                                 @if ($post->transfer_id)
                                     <a href="{{ route('market') }}" class="d-block">
@@ -65,7 +66,7 @@
                             @endif
                             <figure style="width: 96px; height: 96px; display: table-cell; position: relative; line-height: 1.1em;" class="m-0 text-center align-top px-2">
                                 @if ($post->type == "transfer")
-                                    <img src="{{ asset($post->img) }}" style="width: 100%; height: auto; background: #c3cfea; border: 1px solid #940a53" class="rounded-circle">
+                                    <img src="{{ asset($post->img) }}" style="width: 100%; height: auto; background: #ECE8CE; border: 1px solid #590096" class="rounded-circle">
                                 @elseif ($post->type == "press")
                                     <img src="{{ asset($post->img) }}" style="margin: .5em; width: auto; height: 60px;" class="rounded">
                                     <small class="text-white d-inline-block text-truncate" style="max-width: 80px;">{{ $post->press->participant->user->name }}</small>
@@ -90,7 +91,7 @@
                                         <span class="text-white d-block" style="font-size: .7em">
                                             {{ $post->created_at->diffForHumans() }}
                                         </span>
-                                        <span style="display: block; margin-bottom: 6px; font-size: 11px; color: #00d4e4">
+                                        <span style="display: block; margin-bottom: 6px; font-size: 11px; color: #08f8bf">
                                             {{ $post->category }}
                                             @if ($post->type == "champion")
                                                 <span> - {{ $post->match->competition()->season->name }}</span>
@@ -114,10 +115,10 @@
                                     </a>
                                 @endif
                             @endif
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-        </div>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        @endif
     </div>
 </div>

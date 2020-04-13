@@ -1,7 +1,7 @@
 <div class="search">
 	<div class="header">
 		<div class="container">
-			<h2 class="text-center">
+			<h2>
 				Listado de jugadores
 			</h2>
 			<div class="filters text-center p-2">

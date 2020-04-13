@@ -7,8 +7,8 @@
 }
 
 .competition-header {
-	background: #353f48;
-	margin-top: 55px;
+	background: #252B31;
+	margin-top: 54px;
 	padding: .75rem .25rem;
 	.logo {
 		display: table-cell;
@@ -41,10 +41,10 @@
 }
 
 .competition-menu {
-	background: #353f48;
-	border-top: 1px solid #414E5B;
+	background: #252B31;
+	border-top: 1px solid lighten(#252B31, 6%);
 	ul {
-		padding: 0;
+		padding: .25em 0;
 		.item {
 			display: inline-block;
 			min-width: 55px;
@@ -57,10 +57,10 @@
 			}
 		 	&.active {
 		 		a {
-		 			color: #89be38;
+		 			color: #ffd900;
 		 			pointer-events: none;
 		 			&:hover {
-		 				color: #89be38;
+		 				color: #ffd900;
 		 			}
 		 		}
 		 	}

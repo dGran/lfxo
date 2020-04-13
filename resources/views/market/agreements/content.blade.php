@@ -1,12 +1,12 @@
-<div class="negotiations">
-	<div class="" style="background: #EEEEEE; border-bottom: 1px solid #f1eff3; padding: .5rem .5rem 1rem .5rem;">
+<div class="agreements">
+
+	<div class="header">
 		<div class="container">
-			<h2 class="text-center" style="color: #FC0053; font-weight: 400; font-size: 28px; line-height: 1.3em; margin: .5em 0; padding: .25rem 0;">
+			<h2>
 				Acuerdos confirmados
 			</h2>
-		</div> {{-- container --}}
-	</div> {{-- header --}}
-
+		</div>
+	</div>
 
 	<div class="container">
 		<div class="row justify-content-md-center">

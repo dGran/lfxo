@@ -2,7 +2,7 @@
 
 	<div class="header">
 		<div class="container">
-			<h2 class="text-center">
+			<h2>
 				Resumen del mercado, todos los movimientos
 			</h2>
 		</div>  <!-- container -->

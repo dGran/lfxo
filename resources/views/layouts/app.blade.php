@@ -74,7 +74,7 @@
 
     <body class="d-flex flex-column">
 
-        <div class="flex-grow-1 flex-shrink-0">
+        <div class="flex-grow-1 flex-shrink-0" style="background-color: #f9f9f9">
             <header>
                 @include('layouts.partials.top_menu')
                 @yield('section')

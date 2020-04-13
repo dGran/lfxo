@@ -3,8 +3,8 @@
 }
 
 .competition-header {
-  background: #353f48;
-  margin-top: 55px;
+  background: #252B31;
+  margin-top: 54px;
   padding: .75rem .25rem;
 }
 
@@ -42,12 +42,12 @@
 }
 
 .competition-menu {
-  background: #353f48;
-  border-top: 1px solid #414E5B;
+  background: #252B31;
+  border-top: 1px solid #323a42;
 }
 
 .competition-menu ul {
-  padding: 0;
+  padding: .25em 0;
 }
 
 .competition-menu ul .item {
@@ -64,12 +64,12 @@
 }
 
 .competition-menu ul .item.active a {
-  color: #89be38;
+  color: #ffd900;
   pointer-events: none;
 }
 
 .competition-menu ul .item.active a:hover {
-  color: #89be38;
+  color: #ffd900;
 }
 
 .competition-menu ul .item a {

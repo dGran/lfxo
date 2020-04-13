@@ -2,7 +2,7 @@
 
 	<div class="header">
 		<div class="container">
-			<h2 class="text-center">
+			<h2>
 				Jugadores transferibles, cedibles y en venta directa
 			</h2>
 			<div class="filters text-center p-2">

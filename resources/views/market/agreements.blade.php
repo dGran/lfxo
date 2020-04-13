@@ -7,7 +7,7 @@
 @section('content')
 	@include('market.partials.header')
 
-	<div class="wrapper">
+	<div class="wrapper" style="background: #f9f9f9">
 		@include('market.agreements.content')
 	</div> {{-- wrapper --}}
 @endsection
