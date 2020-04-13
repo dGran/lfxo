@@ -40,7 +40,7 @@
 </div>
 
 
-<div class="row">
+<div class="row no-gutters">
     <div class="col-12">
         @if ($posts->count() == 0)
             <div class="container">
