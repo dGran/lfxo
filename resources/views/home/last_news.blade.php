@@ -43,8 +43,10 @@
 <div class="row">
     <div class="col-12">
         @if ($posts->count() == 0)
-            <div class="px-4 py-3 text-white">
-                No existen noticias
+            <div class="container">
+                <div class="px-4 py-3 text-white">
+                    No existen noticias
+                </div>
             </div>
         @else
             <ul style="list-style: none; margin:0; padding: 0; border-bottom: 1px solid #0a1217">
