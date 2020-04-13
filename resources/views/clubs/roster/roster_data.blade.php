@@ -8,7 +8,7 @@
 <div class="container">
 	<div class="row m-0">
 		@foreach ($participant->players as $player)
-			@if ($player->player->position == 'PT')
+			@if ($player->player->position == 'PO')
 				@include('clubs.roster.card_data')
 			@endif
 		@endforeach
@@ -24,7 +24,7 @@
 <div class="container">
 	<div class="row m-0">
 		@foreach ($participant->players as $player)
-			@if ($player->player->position == 'CT' || $player->player->position == 'LD' || $player->player->position == 'LI')
+			@if ($player->player->position == 'DFC' || $player->player->position == 'LD' || $player->player->position == 'LI' || $player->player->position == 'CAD' || $player->player->position == 'CAI')
 				@include('clubs.roster.card_data')
 			@endif
 		@endforeach
@@ -40,7 +40,7 @@
 <div class="container">
 	<div class="row m-0">
 		@foreach ($participant->players as $player)
-			@if ($player->player->position == 'MCD' || $player->player->position == 'MC' || $player->player->position == 'MP' || $player->player->position == 'II' || $player->player->position == 'ID')
+			@if ($player->player->position == 'MCD' || $player->player->position == 'MC' || $player->player->position == 'MCO' || $player->player->position == 'MI' || $player->player->position == 'MD')
 				@include('clubs.roster.card_data')
 			@endif
 		@endforeach

@@ -36,7 +36,10 @@ class Player extends Model
 
     public function fifaindex_link() {
     	return "https://www.fifaindex.com/es/player/" . $this->game_id;
+    }
 
+    public function sofifa_link() {
+    	return "https://sofifa.com/player/" . $this->game_id;
     }
 
 	public function scopeName($query, $name)

@@ -95,7 +95,7 @@
 			<div class="detail container">
 				<div class="row pb-2">
 					@foreach ($players as $player)
-						@if ($player->player->position == 'PT')
+						@if ($player->player->position == 'PO')
 							@include('market.my_team.card_data')
 						@endif
 					@endforeach
@@ -113,7 +113,7 @@
 			<div class="detail container">
 				<div class="row pb-2">
 					@foreach ($players as $player)
-						@if ($player->player->position == 'CT' || $player->player->position == 'LD' || $player->player->position == 'LI')
+						@if ($player->player->position == 'DFC' || $player->player->position == 'LD' || $player->player->position == 'LI' || $player->player->position == 'CAD' || $player->player->position == 'CAI')
 							@include('market.my_team.card_data')
 						@endif
 					@endforeach
@@ -131,7 +131,7 @@
 			<div class="detail container">
 				<div class="row pb-2">
 					@foreach ($players as $player)
-						@if ($player->player->position == 'MCD' || $player->player->position == 'MC' || $player->player->position == 'MP' || $player->player->position == 'ID' || $player->player->position == 'II')
+						@if ($player->player->position == 'MCD' || $player->player->position == 'MC' || $player->player->position == 'MCO' || $player->player->position == 'MD' || $player->player->position == 'MI')
 							@include('market.my_team.card_data')
 						@endif
 					@endforeach

@@ -14,13 +14,9 @@
                         <i class="fas fa-images"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right my-1" aria-labelledby="addon-images">
-                        <a class="dropdown-item text-secondary link_web_images" href="{{ route('admin.players.link_web_images', 'pesdb') }}">
+                        <a class="dropdown-item text-secondary link_web_images" href="{{ route('admin.players.link_web_images') }}">
                             <span class="fas fa-images fa-fw mr-1"></span>
                             <span>Enlazar imágenes (fifaindex)</span>
-                        </a>
-                        <a class="dropdown-item text-secondary link_web_images" href="{{ route('admin.players.link_web_images', 'pesmaster') }}">
-                            <span class="fas fa-images fa-fw mr-1"></span>
-                            <span>Enlazar imágenes (sofifa)</span>
                         </a>
                         <a class="dropdown-item text-secondary unlink_web_images" href="{{ route('admin.players.unlink_web_images') }}">
                             <span class="fas fa-eraser fa-fw mr-1"></span>

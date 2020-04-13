@@ -233,18 +233,14 @@
         window.location.href=url;
     }
 
-    function linkImageMany(www) {
+    function linkImageMany() {
         window.event.preventDefault();
         disabledActionsButtons();
         var ids = [];
         $(".mark:checked").each(function() {
             ids.push($(this).val());
         });
-        if (www == 'fifaindex') {
-            var url = '{{ route("admin.players.link_web_image.many", [":ids", "fifaindex"]) }}';
-        } else {
-            var url = '{{ route("admin.players.link_web_image.many", [":ids", "sofifa"]) }}';
-        }
+        var url = '{{ route("admin.players.link_web_image.many", [":ids"]) }}';
         url = url.replace(':ids', ids);
         window.location.href=url;
     }

@@ -40,20 +40,16 @@ function validateUrl($url)
 	 else return false;
 }
 
-function pesdb_player_info_path($id) {
-	return "https://www.fifaindex.com/static/FIFA20/images/players/5/" . $id;
+function fifaindex_player_info_path($id) {
+	return "https://www.fifaindex.com/es/player/" . $id;
 }
 
 function fifaindex_player_img_path($id) {
-	return "https://www.fifaindex.com/static/FIFA20/images/players/5/" . $id . ".png";
+	return "https://www.fifaindex.com/static/FIFA20/images/players/10/" . $id . ".png";
 }
 
-function pesmaster_player_info_path($id) {
-	return "https://www.pesmaster.com/neymar/pes-2019/player/" . $id;
-}
-
-function pesmaster_player_img_path($id) {
-	return "https://www.pesmaster.com/pes-2020/graphics/players/player_" . $id . ".png";
+function sofifa_player_info_path($id) {
+	return "https://sofifa.com/player/" . $id;
 }
 
 function send_telegram_notification($text) {
