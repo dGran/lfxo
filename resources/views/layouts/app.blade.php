@@ -74,7 +74,8 @@
 
     <body class="d-flex flex-column">
 
-        <div class="flex-grow-1 flex-shrink-0" style="background-color: #f9f9f9">
+        <div class="flex-grow-1 flex-shrink-0" style="background: rgb(10,18,23);
+background: linear-gradient(180deg, rgba(10,18,23,1) 0%, rgba(10,18,23,1) 30%, rgba(249,249,249,1) 30%, rgba(249,249,249,1) 100%);">
             <header>
                 @include('layouts.partials.top_menu')
                 @yield('section')
