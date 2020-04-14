@@ -194,10 +194,11 @@ class SeasonParticipant extends Model
             ->seasonId($this->season->id)
             ->where('participant_id', '=', $this->id)
             ->where(function($q) {
-                $q->where('players.position', '=', 'CT')
+                $q->where('players.position', '=', 'DFC')
                   ->orWhere('players.position', '=', 'LI')
                   ->orWhere('players.position', '=', 'LD')
-                  ->orWhere('players.position', '=', 'LD');
+                  ->orWhere('players.position', '=', 'CAD')
+                  ->orWhere('players.position', '=', 'CAI');
             })
             ->orderBy('players.overall_rating', 'desc')
             ->take(3)->get();
@@ -212,9 +213,9 @@ class SeasonParticipant extends Model
             ->where(function($q) {
                 $q->where('players.position', '=', 'MCD')
                   ->orWhere('players.position', '=', 'MC')
-                  ->orWhere('players.position', '=', 'MP')
-                  ->orWhere('players.position', '=', 'II')
-                  ->orWhere('players.position', '=', 'ID');
+                  ->orWhere('players.position', '=', 'MCO')
+                  ->orWhere('players.position', '=', 'MI')
+                  ->orWhere('players.position', '=', 'MD');
             })
             ->orderBy('players.overall_rating', 'desc')
             ->take(3)->get();

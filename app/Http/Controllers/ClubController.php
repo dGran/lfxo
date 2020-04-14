@@ -207,7 +207,6 @@ class ClubController extends Controller
     }
 
 
-
     // helpers functions
 
     protected function get_season($season_slug)

@@ -3,15 +3,20 @@
 }
 
 .club-header {
-  background: #252B31;
+  background: #0a1217;
+  background: -webkit-gradient(linear, left top, left bottom, from(#0a1217), color-stop(50%, #181f24), to(#252b31));
+  background: linear-gradient(180deg, #0a1217 0%, #181f24 50%, #252b31 100%);
+  border-top: 1px solid #252B31;
   margin-top: 54px;
   padding: .75rem .25rem;
 }
 
 .club-header h3 {
-  color: #fff;
   font-size: 1.5em;
   margin: 0;
+  background: -webkit-linear-gradient(#fff, #C6C6C6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .club-header img {

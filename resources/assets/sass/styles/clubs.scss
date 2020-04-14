@@ -7,13 +7,17 @@
 }
 
 .club-header {
-	background: #252B31;
+	background: rgb(10,18,23);
+	background: linear-gradient(180deg, rgba(10,18,23,1) 0%, rgba(24,31,36,1) 50%, rgba(37,43,49,1) 100%);
+	border-top: 1px solid #252B31;
 	margin-top: 54px;
 	padding: .75rem .25rem;
 	h3 {
-		color: #fff;
 		font-size: 1.5em;
 		margin: 0;
+		background: -webkit-linear-gradient(#fff, #C6C6C6);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 	}
 	img {
 		width: 55px;
