@@ -859,7 +859,7 @@ class SeasonController extends Controller
         foreach ($players as $player) {
             $season_player = SeasonPlayer::create([
                 'season_id' => $season->id,
-                'participant_id' => $player->pack_id,
+                'participant_id' => 0,
                 'player_id' => $player->id,
             ]);
             event(new TableWasImported($season_player, $player->name . " en " . $season->name));

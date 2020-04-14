@@ -1,4 +1,4 @@
-<div class="agreements">
+<div class="negotiations">
 
 	<div class="header">
 		<div class="container">
