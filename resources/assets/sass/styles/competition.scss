@@ -98,15 +98,33 @@
 }
 
 .competitions-list {
-	margin: 0;
+	margin: .5em;
 	padding-bottom: 1em;
 	.competition-item {
 		background: #fff;
 		border-radius: 4px;
-		border: 1px solid #EBEBEB;
+		border: 1px solid #d8d8d8;
 		margin-top: 1em;
+		min-height: 120px;
 		&:hover {
-			background: #F7F7F6;
+			background-color: lighten($warning, 36%);
+			border: 1px solid lighten($warning, 25%);
+			transition: all .5s ease;
+			h5 {
+				color: #FD6908;
+				transition: all .5s ease;
+			}
+			.links {
+				border-left: 1px solid lighten($warning, 25%);
+				transition: all .5s ease;
+			}
+			.logo {
+				img {
+					-webkit-filter: grayscale(60%);
+					filter: grayscale(60%);
+					transition: all .5s ease;
+				}
+			}
 		}
 		.logo {
 			display: inline-block;
@@ -119,7 +137,8 @@
 		}
 		.links {
 			display: inline-block;
-			border-left: 1px solid #EBEBEB;
+			border-left: 1px solid #d8d8d8;
+			min-height: 120px;
 			font-size: .9em;
 			padding: 1.5em;
 			vertical-align: top;
@@ -135,9 +154,19 @@
 				line-height: 1.25rem;
 				list-style: none;
 				padding: 0 1em;
-				li {;
+				li {
 					a {
+						color: $secondary;
 						font-size: 1em;
+						&:hover {
+							color: #FD6908;
+							i {
+								color: #FD6908;
+							}
+						}
+						i {
+							color: $secondary;
+						}
 					}
 				}
 			}
@@ -605,21 +634,25 @@
 	.card {
 		display: inline-block;
 		background: transparent;
-		&.competitions {
+		&.competition {
 			border: none;
 			max-width: 48px;
 			min-width: 48px;
 			padding: .25em;
 			text-align: center;
 			&.active {
-				background: rgba(0, 0, 0, .30);
+				background: #3B4651;
 				pointer-events: none;
+				img {
+					filter: grayscale(70%);
+				}
 			}
 			&:hover {
-				background: rgba(0, 0, 0, .1);
+				background: #3B4651;
 			}
 			a {
 				text-align: center;
+				text-decoration: none;
 				img {
 					display: block;
 					height: auto;
@@ -706,6 +739,9 @@
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
+	.competitions-list {
+		margin: 0;
+	}
 	.table-results {
 		tbody {
 			.data {

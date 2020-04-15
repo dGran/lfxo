@@ -22,48 +22,48 @@
 			@if ($participant->team)
 				<div class="col-12 col-md-6 col-lg-4">
 					<div class="club-card">
-						<div class="text-center d-table-cell" style="width: 170px">
-							<a class="text-dark" href="{{route('club', [$season_slug, $participant->team->slug]) }}">
-								<img src="{{ $participant->logo() }}" alt="" width="72px">
-								<span class="d-block mt-1" style="font-size: .9em; font-weight: bold">{{ $participant->name() }}</span>
-								<span class="d-block" style="font-size: .8em;">{{ $participant->sub_name() }}</span>
+						<div class="info">
+							<a href="{{route('club', [$season_slug, $participant->team->slug]) }}">
+								<img src="{{ $participant->logo() }}" alt="">
+								<span class="name mt-1">{{ $participant->name() }}</span>
+								<span class="subname">{{ $participant->sub_name() }}</span>
 							</a>
 						</div>
-						<div class="d-table-cell border-left align-top ">
+						<div class="links">
 							<ul>
 								<li>
-									<a class="text-dark" href="{{route('club', [$season_slug, $participant->team->slug]) }}">
-										<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+									<a href="{{route('club', [$season_slug, $participant->team->slug]) }}">
+										<i class="fas fa-caret-right mr-1"></i>
 										Club
 									</a>
 								</li>
 								<li>
-									<a class="text-dark" href="{{route('club.roster', [$season_slug, $participant->team->slug]) }}">
-										<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+									<a href="{{route('club.roster', [$season_slug, $participant->team->slug]) }}">
+										<i class="fas fa-caret-right mr-1"></i>
 										Plantilla
 									</a>
 								</li>
 								<li>
-									<a class="text-dark" href="{{route('club.economy', [$season_slug, $participant->team->slug]) }}">
-										<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+									<a href="{{route('club.economy', [$season_slug, $participant->team->slug]) }}">
+										<i class="fas fa-caret-right mr-1"></i>
 										Economía
 									</a>
 								</li>
 								<li>
-									<a class="text-dark" href="{{route('club.calendar', [$season_slug, $participant->team->slug]) }}">
-										<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+									<a href="{{route('club.calendar', [$season_slug, $participant->team->slug]) }}">
+										<i class="fas fa-caret-right mr-1"></i>
 										Calendario
 									</a>
 								</li>
 								<li>
-									<a class="text-dark" href="{{route('club.pending_matches', [$season_slug, $participant->team->slug]) }}">
-										<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+									<a href="{{route('club.pending_matches', [$season_slug, $participant->team->slug]) }}">
+										<i class="fas fa-caret-right mr-1"></i>
 										Pendientes
 									</a>
 								</li>
 								<li>
-									<a class="text-dark" href="{{route('club.press', [$season_slug, $participant->team->slug]) }}">
-										<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+									<a href="{{route('club.press', [$season_slug, $participant->team->slug]) }}">
+										<i class="fas fa-caret-right mr-1"></i>
 										Prensa
 									</a>
 								</li>

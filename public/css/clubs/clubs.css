@@ -535,18 +535,90 @@
   border-radius: 4px;
   border: 1px solid #d8d8d8;
   margin: 15px 5px 0 5px;
-  padding: 1em 0;
 }
 
 .club-card:hover {
-  background: #ecebeb;
+  background-color: #fefbf7;
+  border: 1px solid #fae3c4;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
 }
 
-.club-card ul {
+.club-card:hover .info img {
+  -webkit-filter: grayscale(60%);
+  filter: grayscale(60%);
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.club-card:hover .info .name,
+.club-card:hover .info .subname {
+  color: #FD6908;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.club-card:hover .links {
+  border-left: 1px solid #fae3c4;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+}
+
+.club-card .info {
+  text-align: center;
+  display: table-cell;
+  padding: 1em 0;
+  width: 170px;
+}
+
+.club-card .info a {
+  color: #6c757d;
+}
+
+.club-card .info img {
+  width: 72px;
+}
+
+.club-card .info .name {
+  display: block;
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.club-card .info .subname {
+  display: block;
+  font-size: .8em;
+}
+
+.club-card .links {
+  border-left: 1px solid #d8d8d8;
+  display: table-cell;
+  padding: 1em 0;
+  vertical-align: top;
+}
+
+.club-card .links ul {
   font-size: .9em;
   line-height: 1.4rem;
   list-style: none;
   padding: 0 1em;
+}
+
+.club-card .links ul li a {
+  color: #6c757d;
+  font-size: 1em;
+}
+
+.club-card .links ul li a:hover {
+  color: #FD6908;
+}
+
+.club-card .links ul li a:hover i {
+  color: #FD6908;
+}
+
+.club-card .links ul li a i {
+  color: #6c757d;
 }
 
 .scrolling-wrapper .card {
@@ -563,12 +635,17 @@
 }
 
 .scrolling-wrapper .card.participants.active {
-  background: rgba(0, 0, 0, 0.3);
+  background: #3B4651;
   pointer-events: none;
 }
 
+.scrolling-wrapper .card.participants.active img {
+  -webkit-filter: grayscale(70%);
+          filter: grayscale(70%);
+}
+
 .scrolling-wrapper .card.participants:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: #3B4651;
 }
 
 .scrolling-wrapper .card.participants a {

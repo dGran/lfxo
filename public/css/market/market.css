@@ -1381,7 +1381,7 @@
 
 .teams .content .item {
   background: #ffffff;
-  border: 1px solid #E5E5E5;
+  border: 1px solid #d8d8d8;
   height: 155px;
   position: relative;
   margin-top: 1em;
@@ -1389,18 +1389,19 @@
 }
 
 .teams .content .item:hover {
-  border: 1px solid #939ba2;
+  background-color: #fefbf7;
+  border: 1px solid #fae3c4;
 }
 
 .teams .content .item:hover .team-img {
-  background: #fff;
+  background-color: #fff;
   -webkit-transition: all 1.5s ease;
   transition: all 1.5s ease;
 }
 
 .teams .content .item:hover .title .name,
 .teams .content .item:hover .title .subname {
-  color: #6c757d;
+  color: #FD6908;
   -webkit-transition: all .5s ease;
   transition: all .5s ease;
 }
@@ -2010,12 +2011,17 @@
 }
 
 .scrolling-wrapper .card.participants.active {
-  background: rgba(0, 0, 0, 0.3);
+  background: #3B4651;
   pointer-events: none;
 }
 
+.scrolling-wrapper .card.participants.active img {
+  -webkit-filter: grayscale(70%);
+          filter: grayscale(70%);
+}
+
 .scrolling-wrapper .card.participants:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: #3B4651;
 }
 
 .scrolling-wrapper .card.participants a {

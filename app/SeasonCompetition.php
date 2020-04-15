@@ -67,4 +67,23 @@ class SeasonCompetition extends Model
         }
 
     }
+
+    public function isConfigured() {
+        if ($this->phases->count() > 0) {
+            if ($this->initialPhase()->groups->count() > 0) {
+                if ($this->initialPhase()->mode == 'league') {
+                    if ($this->initialPhase()->initialGroup()->league) {
+                        return true;
+                    }
+                } else {
+                    if ($this->initialPhase()->initialGroup()->playoff) {
+                        if ($this->initialPhase()->initialGroup()->playoff->rounds->count() > 0) {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

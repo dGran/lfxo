@@ -8,31 +8,33 @@
 				<h5>{{ $competition->name }}</h5>
 				<ul>
 					<li>
-						<a class="text-secondary {{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.table', [$season_slug, $competition->slug]) }}">
-							<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+						<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.table', [$season_slug, $competition->slug]) }}">
+							<i class="fas fa-caret-right mr-1"></i>
 							{{ $competition->initialPhase()->mode == 'league' ? 'Clasificación' : 'PlayOffs' }}
 						</a>
 					</li>
 					<li>
-						<a class="text-secondary {{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.calendar', [$season_slug, $competition->slug]) }}">
-							<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+						<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.calendar', [$season_slug, $competition->slug]) }}">
+							<i class="fas fa-caret-right mr-1"></i>
 							Partidos
 						</a>
 					</li>
 					<li>
-						<a class="text-secondary {{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.stats', [$season_slug, $competition->slug]) }}">
-							@if ($competition->initialPhase()->mode == 'league')
-								@if ($competition->initialPhase()->initialGroup()->league && $competition->initialPhase()->initialGroup()->league->has_stats())
-									<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
+						@if ($competition->initialPhase()->mode == 'league')
+							@if ($competition->initialPhase()->initialGroup()->league && $competition->initialPhase()->initialGroup()->league->has_stats())
+								<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.stats', [$season_slug, $competition->slug]) }}">
+									<i class="fas fa-caret-right mr-1"></i>
 									Estadísticas
-								@endif
-							@else
-								@if ($competition->initialPhase()->initialGroup()->league && $competition->initialPhase()->initialGroup()->playoff->has_stats())
-									<i class="fas fa-caret-right mr-1" style="color: #89be38"></i>
-									Estadísticas
-								@endif
+								<a>
 							@endif
-						</a>
+						@else
+							@if ($competition->initialPhase()->initialGroup()->league && $competition->initialPhase()->initialGroup()->playoff->has_stats())
+								<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.stats', [$season_slug, $competition->slug]) }}">
+									<i class="fas fa-caret-right mr-1"></i>
+									Estadísticas
+								<a>
+							@endif
+						@endif
 					</li>
 				</ul>
 			</div>

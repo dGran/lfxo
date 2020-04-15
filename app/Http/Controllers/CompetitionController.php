@@ -50,7 +50,7 @@ class CompetitionController extends Controller
     	$competition = SeasonCompetition::where('slug', '=', $competition_slug)->firstOrFail();
     	$competitions = SeasonCompetition::where('season_id', '=', $season->id)->orderBy('name', 'asc')->get();
 
-		if ($competition->phases->count()>0) {
+		if ($competition->isConfigured()) {
 			if (!$phase_slug) {
 				$phase = SeasonCompetitionPhase::where('competition_id', '=', $competition->id)
 				->where('active', '=', 1)->orderBy('id', 'desc')->firstOrFail();

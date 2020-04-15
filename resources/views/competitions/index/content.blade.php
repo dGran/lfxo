@@ -21,7 +21,9 @@
 		<div class="col-12">
 		    <div class="row competitions-list">
 				@foreach ($competitions as $competition)
-					@include('competitions.index.card_data')
+					@if ($competition->isConfigured())
+						@include('competitions.index.card_data')
+					@endif
 				@endforeach
 		    </div>
 		</div>
