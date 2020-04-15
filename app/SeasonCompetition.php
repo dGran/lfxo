@@ -71,14 +71,18 @@ class SeasonCompetition extends Model
     public function isConfigured() {
         if ($this->phases->count() > 0) {
             if ($this->initialPhase()->groups->count() > 0) {
-                if ($this->initialPhase()->mode == 'league') {
-                    if ($this->initialPhase()->initialGroup()->league) {
-                        return true;
-                    }
-                } else {
-                    if ($this->initialPhase()->initialGroup()->playoff) {
-                        if ($this->initialPhase()->initialGroup()->playoff->rounds->count() > 0) {
-                            return true;
+                if ($this->initialPhase()->active) {
+                    if ($this->initialPhase()->mode == 'league') {
+                        if ($this->initialPhase()->initialGroup()->league) {
+                            if ($this->initialPhase()->initialGroup()->league->days->count() > 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        if ($this->initialPhase()->initialGroup()->playoff) {
+                            if ($this->initialPhase()->initialGroup()->playoff->rounds->count() > 0) {
+                                return true;
+                            }
                         }
                     }
                 }
