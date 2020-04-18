@@ -7,73 +7,139 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-use Telegram\Bot\Laravel\Facades\Telegram;
-
 use App\SeasonParticipant;
 use App\SeasonParticipantCashHistory as Cash;
+
+use App\Events\TableWasDeleted;
+
+use Telegram\Bot\Laravel\Facades\Telegram;
 use App\GeneralSetting;
+
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    // Telegram
-    public function telegram_notifications() {
-    	return $notifications = GeneralSetting::first()->telegram_notifications;
-    }
+	protected function add_cash_history($participant_id, $match_id, $transfer_id, $trade_id, $description, $amount, $movement) {
+	    $cash = new Cash;
+	    $cash->participant_id = $participant_id;
+	    $cash->match_id = $match_id;
+	    $cash->transfer_id = $transfer_id;
+	    $cash->trade_id = $trade_id;
+	    $cash->description = $description;
+	    $cash->amount = $amount;
+	    $cash->movement = $movement;
+	    $cash->save();
+	}
 
-    public function telegram_source() {
-        return $source = GeneralSetting::first()->telegram_source;
-    }
+	protected function destroy_group($group) {
+	    foreach ($group->participants as $participant) {
+	        $participant->delete();
+	    }
+	    if ($group->phase->mode == 'league') {
+	        foreach ($group->league->days as $day) {
+	            foreach ($day->matches as $match) {
+	                foreach ($match->stats as $stat) {
+	                    $stat->delete();
+	                }
+	                foreach ($match->cash_histories as $cash) {
+	                    $cash->delete();
+	                }
+	                $match->delete();
+	            }
+	            $day->delete();
+	        }
+	        foreach ($group->league->table_zones as $table_zone) {
+	            $table_zone->delete();
+	        }
+	        $group->league->delete();
+	    } else {
+	        foreach ($group->playoff->rounds as $round) {
+	        	foreach ($round->clashes as $clash) {
+		            foreach ($clash->matches as $match) {
+		                foreach ($match->stats as $stat) {
+		                    $stat->delete();
+		                }
+		                foreach ($match->cash_histories as $cash) {
+		                    $cash->delete();
+		                }
+		                $match->delete();
+		            }
+		            $clash->delete();
+		        }
+				foreach ($round->participants as $participant) {
+					$participant->delete();
+				}
+	            $round->delete();
+	        }
+	        $group->playoff->delete();
+	    }
 
-    public function get_telegram_chat() {
-        $source = $this->telegram_source();
-        if ($source == 'production') {
-            $chat_id = env('TELEGRAM_CHANNEL_ID');
-        } else {
-            $chat_id = env('TELEGRAM_TEST_CHANNEL_ID');
+	    event(new TableWasDeleted($group, $group->name));
+	    $group->delete();
+	}
+
+	protected function destroy_phase($phase) {
+	    foreach ($phase->groups as $group) {
+	        $this->destroy_group($group);
+	    }
+	    event(new TableWasDeleted($phase, $phase->name));
+	    $phase->delete();
+	}
+
+	protected function destroy_competition($competition) {
+	    foreach ($competition->phases as $phase) {
+			$this->destroy_phase($phase);
+	    }
+        if ($competition->isLocalImg()) {
+            if (\File::exists(public_path($competition->img))) {
+                \File::delete(public_path($competition->img));
+            }
         }
-        return $chat_id;
-    }
+	    event(new TableWasDeleted($competition, $competition->name));
+	    $competition->delete();
+	}
 
-    public function telegram_notification_channel($text) {
-    	if ($this->telegram_notifications()) {
-            $chat_id = $this->get_telegram_chat();
+	protected function telegram_notifications() {
+		return $notifications = GeneralSetting::first()->telegram_notifications;
+	}
+
+	protected function telegram_source() {
+	    return $source = GeneralSetting::first()->telegram_source;
+	}
+
+	protected function get_telegram_chat() {
+	    $source = $this->telegram_source();
+	    if ($source == 'production') {
+	        $chat_id = env('TELEGRAM_CHANNEL_ID');
+	    } else {
+	        $chat_id = env('TELEGRAM_TEST_CHANNEL_ID');
+	    }
+	    return $chat_id;
+	}
+
+	protected function telegram_notification_channel($text) {
+		if ($this->telegram_notifications()) {
+	        $chat_id = $this->get_telegram_chat();
 			Telegram::sendMessage([
 			    'chat_id' => $chat_id,
 			    'parse_mode' => 'HTML',
 			    'text' => $text
 			]);
-    	}
-    }
+		}
+	}
 
-    protected function telegram_notification_admin($text) {
+	protected function telegram_notification_admin($text) {
 		Telegram::sendMessage([
 		    'chat_id' => env('TELEGRAM_ADMIN_CHANNEL_ID'),
 		    'parse_mode' => 'HTML',
 		    'text' => $text
 		]);
-    }
+	}
 
-    public function telegram_updatedActivity()
-    {
-        $activity = Telegram::getUpdates();
-        dd($activity);
-    }
-    // END: Telegram
-
-
-    // Competitions
-    protected function add_cash_history($participant_id, $description, $amount, $movement) {
-        $cash = new Cash;
-        $cash->participant_id = $participant_id;
-        $cash->description = $description;
-        $cash->amount = $amount;
-        $cash->movement = $movement;
-        $cash->save();
-    }
-    // END: Competitions
-
-    // meter todas las funciones que pueden ser utiles en mas controladores
-
+	protected function telegram_updatedActivity()
+	{
+	    $activity = Telegram::getUpdates();
+	    dd($activity);
+	}
 }

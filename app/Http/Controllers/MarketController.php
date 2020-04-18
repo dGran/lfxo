@@ -136,12 +136,6 @@ class MarketController extends Controller
 		        		$participant_from = $player->participant_id;
 		        		$participant_to = participant_of_user()->id;
 
-			        	$this->add_cash_history(
-			        		$participant_to,
-			        		'Fichaje del agente libre ' . $player->player->name,
-			        		$player->season->free_players_cost,
-			        		'S'
-			        	);
 
 			        	$this->add_transfer(
 			        		'free',
@@ -151,6 +145,16 @@ class MarketController extends Controller
 			        		$player->season->free_players_cost
 			        	);
 			        	$transfer = Transfer::orderBy('id', 'desc')->first();
+
+			        	$this->add_cash_history(
+			        		$participant_to,
+		                    NULL,
+		                    $transfer->id,
+		                    NULL,
+			        		'Fichaje del agente libre ' . $player->player->name,
+			        		$player->season->free_players_cost,
+			        		'S'
+			        	);
 
 						$this->generate_new(
 							'transfer',
@@ -220,37 +224,6 @@ class MarketController extends Controller
 		        		}
 		        		// END::validations
 
-		        		// generate cash movements
-			        	$this->add_cash_history(
-			        		$participant_to->id,
-			        		'Pago de claúsula del jugador ' . $player->player->name,
-			        		$player->price,
-			        		'S'
-			        	);
-			        	$this->add_cash_history(
-			        		$participant_to->id,
-			        		'Impuestos del pago de claúsula del jugador ' . $player->player->name,
-			        		$player->price * 0.10,
-			        		'S'
-			        	);
-
-		        		if ($player->owner_id) {
-				        	$this->add_cash_history(
-				        		$player->owner_id,
-				        		'Ingreso de claúsula del jugador ' . $player->player->name,
-				        		$player->price,
-				        		'E'
-				        	);
-		        		} else {
-				        	$this->add_cash_history(
-				        		$participant_from->id,
-				        		'Ingreso de claúsula del jugador ' . $player->player->name,
-				        		$player->price,
-				        		'E'
-				        	);
-		        		}
-			        	// END::generate cash movements
-
 			        	// save transfer
 			        	$this->add_transfer(
 			        		'clause',
@@ -259,9 +232,52 @@ class MarketController extends Controller
 			        		$participant_to->id,
 			        		$player->price * 1.10
 			        	);
+			        	$transfer = Transfer::orderBy('id', 'desc')->first();
+
+		        		// generate cash movements
+			        	$this->add_cash_history(
+			        		$participant_to->id,
+		                    NULL,
+		                    $transfer->id,
+		                    NULL,
+			        		'Pago de claúsula del jugador ' . $player->player->name,
+			        		$player->price,
+			        		'S'
+			        	);
+			        	$this->add_cash_history(
+			        		$participant_to->id,
+		                    NULL,
+		                    $transfer->id,
+		                    NULL,
+			        		'Impuestos del pago de claúsula del jugador ' . $player->player->name,
+			        		$player->price * 0.10,
+			        		'S'
+			        	);
+
+		        		if ($player->owner_id) {
+				        	$this->add_cash_history(
+				        		$player->owner_id,
+			                    NULL,
+			                    $transfer->id,
+			                    NULL,
+				        		'Ingreso de claúsula del jugador ' . $player->player->name,
+				        		$player->price,
+				        		'E'
+				        	);
+		        		} else {
+				        	$this->add_cash_history(
+				        		$participant_from->id,
+			                    NULL,
+			                    $transfer->id,
+			                    NULL,
+				        		'Ingreso de claúsula del jugador ' . $player->player->name,
+				        		$player->price,
+				        		'E'
+				        	);
+		        		}
+			        	// END::generate cash movements
 
 			        	// generate post (new)
-			        	$transfer = Transfer::orderBy('id', 'desc')->first();
 						$this->generate_new(
 							'transfer',
 							$transfer->id,
@@ -379,21 +395,6 @@ class MarketController extends Controller
 	        		}
 	        		// END::validations
 
-	        		// generate cash movements
-		        	$this->add_cash_history(
-		        		$participant_to->id,
-		        		'Compra directa del jugador ' . $player->player->name,
-		        		$player->sale_price,
-		        		'S'
-		        	);
-		        	$this->add_cash_history(
-		        		$participant_from->id,
-		        		'Venta directa del jugador ' . $player->player->name,
-		        		$player->sale_price,
-		        		'E'
-		        	);
-		        	// END::generate cash movements
-
 		        	// save transfer
 		        	$this->add_transfer(
 		        		'buynow',
@@ -402,9 +403,31 @@ class MarketController extends Controller
 		        		$participant_to->id,
 		        		$player->sale_price
 		        	);
+		        	$transfer = Transfer::orderBy('id', 'desc')->first();
+
+	        		// generate cash movements
+		        	$this->add_cash_history(
+		        		$participant_to->id,
+	                    NULL,
+	                    $transfer->id,
+	                    NULL,
+		        		'Compra directa del jugador ' . $player->player->name,
+		        		$player->sale_price,
+		        		'S'
+		        	);
+		        	$this->add_cash_history(
+		        		$participant_from->id,
+	                    NULL,
+	                    $transfer->id,
+	                    NULL,
+		        		'Venta directa del jugador ' . $player->player->name,
+		        		$player->sale_price,
+		        		'E'
+		        	);
+		        	// END::generate cash movements
+
 
 		        	// generate post (new)
-		        	$transfer = Transfer::orderBy('id', 'desc')->first();
 					$this->generate_new(
 						'transfer',
 						$transfer->id,
@@ -1245,13 +1268,6 @@ class MarketController extends Controller
 		        		$participant_from = $player->participant->id;
 		        		$participant_to = 0;
 
-			        	$this->add_cash_history(
-			        		$player->participant_id,
-			        		'Despido de ' . $player->player->name,
-			        		$player->season->free_players_remuneration,
-			        		'E'
-			        	);
-
 			        	$this->add_transfer(
 			        		'dismiss',
 			        		$player->id,
@@ -1260,6 +1276,16 @@ class MarketController extends Controller
 			        		$player->season->free_players_remuneration
 			        	);
 			        	$transfer = Transfer::orderBy('id', 'desc')->first();
+
+			        	$this->add_cash_history(
+			        		$player->participant_id,
+		                    NULL,
+		                    $transfer->id,
+		                    NULL,
+			        		'Despido de ' . $player->player->name,
+			        		$player->season->free_players_remuneration,
+			        		'E'
+			        	);
 
 						$this->generate_new(
 							'transfer',
@@ -1520,12 +1546,18 @@ class MarketController extends Controller
 				        if ($trade->cash1 > 0) {
 				        	$this->add_cash_history(
 				        		$trade->participant2_id,
+			                    NULL,
+			                    NULL,
+			                    $trade->id,
 				        		'Acuerdo de ' . $trade_type . " con " . $trade->participant1->name(),
 				        		$trade->cash1,
 				        		'E'
 				        	);
 				        	$this->add_cash_history(
 				        		$trade->participant1_id,
+			                    NULL,
+			                    NULL,
+			                    $trade->id,
 				        		'Acuerdo de ' . $trade_type . " con " . $trade->participant2->name(),
 				        		$trade->cash1,
 				        		'S'
@@ -1534,12 +1566,18 @@ class MarketController extends Controller
 				        if ($trade->cash2 > 0) {
 				        	$this->add_cash_history(
 				        		$trade->participant2_id,
+			                    NULL,
+			                    NULL,
+			                    $trade->id,
 				        		'Acuerdo de ' . $trade_type . " con " . $trade->participant1->name(),
 				        		$trade->cash2,
 				        		'S'
 				        	);
 				        	$this->add_cash_history(
 				        		$trade->participant1_id,
+			                    NULL,
+			                    NULL,
+			                    $trade->id,
 				        		'Acuerdo de ' . $trade_type . " con " . $trade->participant2->name(),
 				        		$trade->cash2,
 				        		'E'

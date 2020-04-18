@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\TableZone;
 use App\SeasonPlayer;
-use App\LeagueStat;
+use App\SeasonCompetitionStat;
 use App\SeasonParticipant;
 use App\SeasonParticipantCashHistory as Cash;
 use App\SeasonCompetitionPhaseGroup;
@@ -29,15 +29,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
     {
     	$group = SeasonCompetitionPhaseGroup::where('slug', '=', $group_slug)->firstOrFail();
         $league = $this->check_league($group);
+        $league = $league->fresh();
+
     	$table_zones = TableZone::orderBy('name', 'asc')->get();
-    	if ($league->table_zones->count() == 0) {
-    		foreach ($group->participants as $key => $p) {
-    			$league_table_zone = new SeasonCompetitionPhaseGroupLeagueTableZone;
-    			$league_table_zone->league_id = $league->id;
-    			$league_table_zone->position = $key + 1;
-    			$league_table_zone->save();
-    		}
-    	}
 
         return view('admin.seasons_competitions_phases_groups_leagues.index', compact('group', 'league', 'table_zones'));
     }
@@ -62,11 +56,6 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
 
             $data = request()->all();
             $data['group_id'] = $group->id;
-            $data['stats_mvp'] = request()->stats_mvp ? 1 : 0;
-            $data['stats_goals'] = request()->stats_goals ? 1 : 0;
-            $data['stats_assists'] = request()->stats_assists ? 1 : 0;
-            $data['stats_yellow_cards'] = request()->stats_yellow_cards ? 1 : 0;
-            $data['stats_red_cards'] = request()->stats_red_cards ? 1 : 0;
 
             $league->fill($data);
             if ($league->isDirty()) {
@@ -150,7 +139,7 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             $season_slug = $day->league->group->phase->competition->season->slug;
             $competition_slug = $day->league->group->phase->competition->slug;
             $competition = $day->league->group->phase->competition->name;
-            $calendar_link = 'https://lpx.es/competiciones/' . $season_slug . '/' . $competition_slug . '/partidos';
+            $calendar_link = 'https://lfxo.es/competiciones/' . $season_slug . '/' . $competition_slug . '/partidos';
             $title = "\xE2\x9A\xBD " . $day->day_name() . ", partidos disponibles";
             $text = "$title\n\n\n";
             foreach ($day->matches as $match) {
@@ -261,34 +250,33 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             }
             $match->save();
 
-            if ($match->day->league->has_stats()) {
+            if ($match->competition()->has_stats()) {
                 $local_players = SeasonPlayer::where('participant_id', '=', $match->local_participant->participant->id)->get();
                 foreach ($local_players as $player) {
-                    if ($match->day->league->stats_goals) {
+                    if ($match->competition()->stats_goals) {
                         $goals = request()->{"stats_goals_".$player->id};
                     } else {
                         $goals = 0;
                     }
-                    if ($match->day->league->stats_assists) {
+                    if ($match->competition()->stats_assists) {
                         $assists = request()->{"stats_assists_".$player->id};
                     } else {
                         $assists = 0;
                     }
-                    if ($match->day->league->stats_yellow_cards) {
+                    if ($match->competition()->stats_yellow_cards) {
                         $yellow_cards = request()->{"stats_yellow_cards_".$player->id};
                     } else {
                         $yellow_cards = 0;
                     }
-                    if ($match->day->league->stats_red_cards) {
+                    if ($match->competition()->stats_red_cards) {
                         $red_cards = request()->{"stats_red_cards_".$player->id};
                     } else {
                         $red_cards = 0;
                     }
                     if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
-                        $stat = new LeagueStat;
+                        $stat = new SeasonCompetitionStat;
                         $stat->match_id = $match->id;
-                        $stat->day_id = $match->day->id;
-                        $stat->league_id = $match->day->league->id;
+                        $stat->competition_id = $match->competition()->id;
                         $stat->player_id = $player->id;
                         if ($goals > 0) { $stat->goals = $goals; }
                         if ($assists > 0) { $stat->assists = $assists; }
@@ -300,31 +288,30 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
 
                 $visitor_players = SeasonPlayer::where('participant_id', '=', $match->visitor_participant->participant->id)->get();
                 foreach ($visitor_players as $player) {
-                    if ($match->day->league->stats_goals) {
+                    if ($match->competition()->stats_goals) {
                         $goals = request()->{"stats_goals_".$player->id};
                     } else {
                         $goals = 0;
                     }
-                    if ($match->day->league->stats_assists) {
+                    if ($match->competition()->stats_assists) {
                         $assists = request()->{"stats_assists_".$player->id};
                     } else {
                         $assists = 0;
                     }
-                    if ($match->day->league->stats_yellow_cards) {
+                    if ($match->competition()->stats_yellow_cards) {
                         $yellow_cards = request()->{"stats_yellow_cards_".$player->id};
                     } else {
                         $yellow_cards = 0;
                     }
-                    if ($match->day->league->stats_red_cards) {
+                    if ($match->competition()->stats_red_cards) {
                         $red_cards = request()->{"stats_red_cards_".$player->id};
                     } else {
                         $red_cards = 0;
                     }
                     if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
-                        $stat = new LeagueStat;
+                        $stat = new SeasonCompetitionStat;
                         $stat->match_id = $match->id;
-                        $stat->day_id = $match->day->id;
-                        $stat->league_id = $match->day->league->id;
+                        $stat->competition_id = $match->competition()->id;
                         $stat->player_id = $player->id;
                         if ($goals > 0) { $stat->goals = $goals; }
                         if ($assists > 0) { $stat->assists = $assists; }
@@ -339,6 +326,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             if ($match->local_id != $match->sanctioned_id) {
                 $this->add_cash_history(
                     $match->local_participant->participant->id,
+                    $match->id,
+                    NULL,
+                    NULL,
                     'Partido jugado, ' . $match->match_name(),
                     $match->day->league->play_amount,
                     'E'
@@ -347,6 +337,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             if ($match->visitor_id != $match->sanctioned_id) {
                 $this->add_cash_history(
                     $match->visitor_participant->participant->id,
+                    $match->id,
+                    NULL,
+                    NULL,
                     'Partido jugado, ' . $match->match_name(),
                     $match->day->league->play_amount,
                     'E'
@@ -365,12 +358,18 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if ($play_in_limit) {
                     $this->add_cash_history(
                         $match->local_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Partido jugado en plazo, ' . $match->match_name(),
                         $match->day->league->play_ontime_amount,
                         'E'
                     );
                     $this->add_cash_history(
                         $match->visitor_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Partido jugado en plazo, ' . $match->match_name(),
                         $match->day->league->play_ontime_amount,
                         'E'
@@ -380,6 +379,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if ($match->local_id != $match->sanctioned_id) {
                     $this->add_cash_history(
                         $match->local_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Partido jugado en plazo, ' . $match->match_name(),
                         $match->day->league->play_ontime_amount,
                         'E'
@@ -388,6 +390,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if ($match->visitor_id != $match->sanctioned_id) {
                     $this->add_cash_history(
                         $match->visitor_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Partido jugado en plazo, ' . $match->match_name(),
                         $match->day->league->play_ontime_amount,
                         'E'
@@ -415,6 +420,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if ($local_points > 0) {
                     $this->add_cash_history(
                         $match->local_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Puntos obtenidos (' . $local_result . ') en partido, ' . $match->match_name(),
                         $local_points,
                         'E'
@@ -423,6 +431,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if ($visitor_points > 0) {
                     $this->add_cash_history(
                         $match->visitor_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Puntos obtenidos (' . $visitor_result . ') en partido, ' . $match->match_name(),
                         $visitor_points,
                         'E'
@@ -433,6 +444,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                     if ($local_points > 0) {
                         $this->add_cash_history(
                             $match->local_participant->participant->id,
+                            $match->id,
+                            NULL,
+                            NULL,
                             'Puntos obtenidos (' . $local_result . ') en partido, ' . $match->match_name(),
                             $local_points,
                             'E'
@@ -443,6 +457,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                     if ($visitor_points > 0) {
                         $this->add_cash_history(
                             $match->visitor_participant->participant->id,
+                            $match->id,
+                            NULL,
+                            NULL,
                             'Puntos obtenidos (' . $visitor_result . ') en partido, ' . $match->match_name(),
                             $visitor_points,
                             'E'
@@ -483,15 +500,15 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 }
             }
             $local_economy = "    \xF0\x9F\x92\xB0" . $team_local . " (" . $user_local . ") <b>ingresa</b> " . number_format($local_amount, 2, ",", ".") . " mill.\n";
-            $local_club_link = 'https://lpx.es/clubs/' . $team_local_slug . '/economia';
+            $local_club_link = 'https://lfxo.es/clubs/' . $team_local_slug . '/economia';
             $local_economy_link = "    <a href='$local_club_link'>Historial de economia</a>\n\n";
 
             $visitor_economy = "    \xF0\x9F\x92\xB0" . $team_visitor . " (" . $user_visitor . ") <b>ingresa</b> " . number_format($visitor_amount, 2, ",", ".") . " mill.\n";
-            $visitor_club_link = 'https://lpx.es/clubs/' . $team_visitor_slug . '/economia';
+            $visitor_club_link = 'https://lfxo.es/clubs/' . $team_visitor_slug . '/economia';
             $visitor_economy_link = "    <a href='$visitor_club_link'>Historial de economia</a>\n\n\n";
 
-            $table_link = 'https://lpx.es/competiciones/' . $season_slug . '/' . $competition_slug . '/clasificacion';
-            $calendar_link = 'https://lpx.es/competiciones/' . $season_slug . '/' . $competition_slug . '/partidos';
+            $table_link = 'https://lfxo.es/competiciones/' . $season_slug . '/' . $competition_slug . '/clasificacion';
+            $calendar_link = 'https://lfxo.es/competiciones/' . $season_slug . '/' . $competition_slug . '/partidos';
             $title = "\xE2\x9A\xBD Partido jugado \xF0\x9F\x8E\xAE" . ' - ' . $match->match_name();
 
             $text = "$title\n\n";
@@ -560,13 +577,13 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
         $match = SeasonCompetitionMatch::find($match_id);
 
         // delete old stats
-        $stats = LeagueStat::where('match_id', '=', $match->id)->get();
+        $stats = SeasonCompetitionStat::where('match_id', '=', $match->id)->get();
         foreach ($stats as $stat) {
             $stat->delete();
         }
 
         // save new stats
-        if ($match->day->league->has_stats()) {
+        if ($match->competition()->has_stats()) {
             $local_players = SeasonPlayer::where('participant_id', '=', $match->local_participant->participant->id)->get();
             foreach ($local_players as $player) {
                 if ($match->day->league->stats_goals) {
@@ -590,7 +607,7 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                     $red_cards = 0;
                 }
                 if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
-                    $stat = new LeagueStat;
+                    $stat = new SeasonCompetitionStat;
                     $stat->match_id = $match->id;
                     $stat->day_id = $match->day->id;
                     $stat->league_id = $match->day->league->id;
@@ -626,7 +643,7 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                     $red_cards = 0;
                 }
                 if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
-                    $stat = new LeagueStat;
+                    $stat = new SeasonCompetitionStat;
                     $stat->match_id = $match->id;
                     $stat->day_id = $match->day->id;
                     $stat->league_id = $match->day->league->id;
@@ -692,7 +709,7 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
 
         if ($match->save()) {
             // delete stadistics
-            $stats = LeagueStat::where('match_id', '=', $match->id)->get();
+            $stats = SeasonCompetitionStat::where('match_id', '=', $match->id)->get();
             foreach ($stats as $stat) {
                 $stat->delete();
             }
@@ -700,6 +717,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             if (!$local_sanctioned) {
                 $this->add_cash_history(
                     $match->local_participant->participant->id,
+                    $match->id,
+                    NULL,
+                    NULL,
                     'Reset - Partido jugado, ' . $match->match_name(),
                     $match->day->league->play_amount,
                     'S'
@@ -708,6 +728,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             if (!$visitor_sanctioned) {
                 $this->add_cash_history(
                     $match->visitor_participant->participant->id,
+                    $match->id,
+                    NULL,
+                    NULL,
                     'Reset - Partido jugado, ' . $match->match_name(),
                     $match->day->league->play_amount,
                     'S'
@@ -717,6 +740,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if (!$local_sanctioned) {
                     $this->add_cash_history(
                         $match->local_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Reset - Partido jugado en plazo, ' . $match->match_name(),
                         $match->day->league->play_ontime_amount,
                         'S'
@@ -725,6 +751,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if (!$visitor_sanctioned) {
                     $this->add_cash_history(
                         $match->visitor_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Reset - Partido jugado en plazo, ' . $match->match_name(),
                         $match->day->league->play_ontime_amount,
                         'S'
@@ -735,6 +764,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if (!$local_sanctioned) {
                     $this->add_cash_history(
                         $match->local_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Reset - Puntos obtenidos (' . $local_result . ') en partido, ' . $match->match_name(),
                         $local_points,
                         'S'
@@ -745,6 +777,9 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
                 if (!$visitor_sanctioned) {
                     $this->add_cash_history(
                         $match->visitor_participant->participant->id,
+                        $match->id,
+                        NULL,
+                        NULL,
                         'Reset - Puntos obtenidos (' . $visitor_result . ') en partido, ' . $match->match_name(),
                         $visitor_points,
                         'S'
@@ -759,8 +794,8 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
             $season_slug = $match->day->league->group->phase->competition->season->slug;
             $team_local = $match->local_participant->participant->name();
             $team_visitor = $match->visitor_participant->participant->name();
-            $table_link = 'https://lpx.es/competiciones/' . $season_slug . '/' . $competition_slug . '/clasificacion';
-            $calendar_link = 'https://lpx.es/competiciones/' . $season_slug . '/' . $competition_slug . '/partidos';
+            $table_link = 'https://lfxo.es/competiciones/' . $season_slug . '/' . $competition_slug . '/clasificacion';
+            $calendar_link = 'https://lfxo.es/competiciones/' . $season_slug . '/' . $competition_slug . '/partidos';
             $title = "\xF0\x9F\x9A\xA9 Partido reseteado \xF0\x9F\x94\x99" . ' - ' . $match->match_name();
 
             $text = "$title\n\n";
@@ -795,25 +830,25 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
     	$group = SeasonCompetitionPhaseGroup::where('slug', '=', $group_slug)->firstOrFail();
     	$league = $this->check_league($group);
 
-		$stats_goals = LeagueStat::select('player_id', \DB::raw('SUM(goals) as goals'))
+		$stats_goals = SeasonCompetitionStat::select('player_id', \DB::raw('SUM(goals) as goals'))
 			->where('league_id', '=', $league->id)
 			->whereNotNull('goals')
             ->groupBy('player_id')
             ->orderBy('goals', 'desc')
             ->get();
-		$stats_assists = LeagueStat::select('player_id', \DB::raw('SUM(assists) as assists'))
+		$stats_assists = SeasonCompetitionStat::select('player_id', \DB::raw('SUM(assists) as assists'))
 			->where('league_id', '=', $league->id)
 			->whereNotNull('assists')
             ->groupBy('player_id')
             ->orderBy('assists', 'desc')
             ->get();
-		$stats_yellow_cards = LeagueStat::select('player_id', \DB::raw('SUM(yellow_cards) as yellow_cards'))
+		$stats_yellow_cards = SeasonCompetitionStat::select('player_id', \DB::raw('SUM(yellow_cards) as yellow_cards'))
 			->where('league_id', '=', $league->id)
 			->whereNotNull('yellow_cards')
             ->groupBy('player_id')
             ->orderBy('yellow_cards', 'desc')
             ->get();
-		$stats_red_cards = LeagueStat::select('player_id', \DB::raw('SUM(red_cards) as red_cards'))
+		$stats_red_cards = SeasonCompetitionStat::select('player_id', \DB::raw('SUM(red_cards) as red_cards'))
 			->where('league_id', '=', $league->id)
 			->whereNotNull('red_cards')
             ->groupBy('player_id')
@@ -838,6 +873,15 @@ class SeasonCompetitionPhaseGroupLeagueController extends Controller
         	$league->group_id = $group->id;
         	$league->save();
         	$league = SeasonCompetitionPhaseGroupLeague::where('group_id', '=', $group->id)->get()->first();
+        }
+
+        if ($league->table_zones->count() == 0) {
+            for ($i=0; $i < $league->group->num_participants; $i++) {
+                $table_zones = new SeasonCompetitionPhaseGroupLeagueTableZone;
+                $table_zones->league_id = $league->id;
+                $table_zones->position = $i+1;
+                $table_zones->save();
+            }
         }
 
         return $league;

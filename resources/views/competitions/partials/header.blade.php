@@ -20,4 +20,6 @@
 	</div>
 </div>
 
-@include('competitions.partials.phase_group_selector')
+@if (\Route::current()->getName() != 'competitions.stats')
+	@include('competitions.partials.phase_group_selector')
+@endif

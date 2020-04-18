@@ -15,7 +15,7 @@
 				</a>
 			</li>
 
-			@if ($league->has_stats())
+			@if ($competition->has_stats())
 				<li class="item {{ \Route::current()->getName() == 'competitions.stats' ? 'active' : '' }}">
 					<a href="{{ route('competitions.stats', [$competition->season->slug, $group->phase->competition->slug]) }}">
 						<i class="fas fa-chart-bar"></i>
@@ -42,7 +42,7 @@
 				</a>
 			</li>
 
-			@if ($playoff->has_stats())
+			@if ($competition->has_stats())
 				<li class="item {{ \Route::current()->getName() == 'competitions.stats' ? 'active' : '' }}">
 					<a href="{{ route('competitions.stats', [$competition->season->slug, $group->phase->competition->slug, $group->phase_slug_if_necesary(), $group->group_slug_if_necesary()]) }}">
 						<i class="fas fa-chart-bar"></i>

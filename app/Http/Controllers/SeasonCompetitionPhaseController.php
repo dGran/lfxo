@@ -118,9 +118,7 @@ class SeasonCompetitionPhaseController extends Controller
 
         if ($phase) {
             $message = 'Se ha eliminado la fase "' . $phase->name . '" correctamente.';
-            event(new TableWasDeleted($phase, $phase->name));
-            $phase->delete();
-
+            $this->destroy_phase($phase);
             return redirect()->route('admin.season_competitions_phases', $slug)->with('success', $message);
         } else {
             $message = 'Acción cancelada. La fase que querías eliminar ya no existe. Se ha actualizado la lista';
@@ -136,9 +134,8 @@ class SeasonCompetitionPhaseController extends Controller
         {
             $phase = SeasonCompetitionPhase::find($ids[$i]);
             if ($phase) {
-                $counter = $counter +1;
-                event(new TableWasDeleted($phase, $phase->name));
-                $phase->delete();
+                $counter += $counter +1;
+                $this->destroy_phase($phase);
             }
         }
         if ($counter > 0) {

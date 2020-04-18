@@ -566,6 +566,9 @@ class PlayOffController extends Controller
             if ($match->local_id != $match->sanctioned_id) {
                 $this->add_cash_history(
                     $match->local_participant->participant->id,
+                    $match->id,
+                    NULL,
+                    NULL,
                     'Partido jugado, ' . $match->match_name(),
                     $local_amount,
                     'E'
@@ -574,6 +577,9 @@ class PlayOffController extends Controller
             if ($match->visitor_id != $match->sanctioned_id) {
                 $this->add_cash_history(
                     $match->visitor_participant->participant->id,
+                    $match->id,
+                    NULL,
+                    NULL,
                     'Partido jugado, ' . $match->match_name(),
                     $visitor_amount,
                     'E'
@@ -594,12 +600,18 @@ class PlayOffController extends Controller
                     if ($play_in_limit) {
                         $this->add_cash_history(
                             $match->local_participant->participant->id,
+                            $match->id,
+                            NULL,
+                            NULL,
                             'Partido jugado en plazo, ' . $match->match_name(),
                             $match->clash->round->play_ontime_amount,
                             'E'
                         );
                         $this->add_cash_history(
                             $match->visitor_participant->participant->id,
+                            $match->id,
+                            NULL,
+                            NULL,
                             'Partido jugado en plazo, ' . $match->match_name(),
                             $match->clash->round->play_ontime_amount,
                             'E'
@@ -609,6 +621,9 @@ class PlayOffController extends Controller
                     if ($match->local_id != $match->sanctioned_id) {
                         $this->add_cash_history(
                             $match->local_participant->participant->id,
+                            $match->id,
+                            NULL,
+                            NULL,
                             'Partido jugado en plazo, ' . $match->match_name(),
                             $match->clash->round->play_ontime_amount,
                             'E'
@@ -617,6 +632,9 @@ class PlayOffController extends Controller
                     if ($match->visitor_id != $match->sanctioned_id) {
                         $this->add_cash_history(
                             $match->visitor_participant->participant->id,
+                            $match->id,
+                            NULL,
+                            NULL,
                             'Partido jugado en plazo, ' . $match->match_name(),
                             $match->clash->round->play_ontime_amount,
                             'E'

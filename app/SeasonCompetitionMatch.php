@@ -21,6 +21,11 @@ class SeasonCompetitionMatch extends Model
         return $this->hasOne('App\PlayOffRoundClash', 'id', 'clash_id');
     }
 
+    public function cash_histories()
+    {
+        return $this->hasMany('App\SeasonParticipantCashHistory', 'match_id', 'id');
+    }
+
     public function competition() {
         $match = SeasonCompetitionMatch::find($this->id);
         if ($match) {
@@ -64,7 +69,7 @@ class SeasonCompetitionMatch extends Model
 
     public function stats()
     {
-        return $this->hasMany('App\LeagueStat', 'match_id', 'id');
+        return $this->hasMany('App\SeasonCompetitionStat', 'match_id', 'id');
     }
 
     public function local_participant()
@@ -108,11 +113,11 @@ class SeasonCompetitionMatch extends Model
     }
 
     public function player_match_stats($player_id) {
-        return $stats = LeagueStat::where('match_id', '=', $this->id)->where('player_id', '=', $player_id)->first();
+        return $stats = SeasonCompetitionStat::where('match_id', '=', $this->id)->where('player_id', '=', $player_id)->first();
     }
 
     public function local_own_goals() {
-        $goals = LeagueStat::where('match_id', '=', $this->id)->where('goals', '>', 0)->get();
+        $goals = SeasonCompetitionStat::where('match_id', '=', $this->id)->where('goals', '>', 0)->get();
         $local_goals = 0;
 
         foreach ($goals as $goal) {
@@ -128,7 +133,7 @@ class SeasonCompetitionMatch extends Model
     }
 
     public function local_own_assists() {
-        $assists = LeagueStat::where('match_id', '=', $this->id)->where('assists', '>', 0)->get();
+        $assists = SeasonCompetitionStat::where('match_id', '=', $this->id)->where('assists', '>', 0)->get();
         $local_assists = 0;
 
         foreach ($assists as $assist) {
@@ -144,7 +149,7 @@ class SeasonCompetitionMatch extends Model
     }
 
     public function visitor_own_goals() {
-        $goals = LeagueStat::where('match_id', '=', $this->id)->where('goals', '>', 0)->get();
+        $goals = SeasonCompetitionStat::where('match_id', '=', $this->id)->where('goals', '>', 0)->get();
         $visitor_goals = 0;
 
         foreach ($goals as $goal) {
@@ -160,7 +165,7 @@ class SeasonCompetitionMatch extends Model
     }
 
     public function visitor_own_assists() {
-        $assists = LeagueStat::where('match_id', '=', $this->id)->where('assists', '>', 0)->get();
+        $assists = SeasonCompetitionStat::where('match_id', '=', $this->id)->where('assists', '>', 0)->get();
         $visitor_assists = 0;
 
         foreach ($assists as $assist) {

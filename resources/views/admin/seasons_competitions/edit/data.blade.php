@@ -57,6 +57,39 @@
                 </div>
             </div>
         </div>
+
+        @if ($competition->season->use_rosters)
+            <div class="form-group row pt-2">
+                <label for="name" class="col-sm-3 col-form-label">Estadísticas</label>
+                <div class="col-sm-9">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="stats_mvp" name="stats_mvp" {{ $competition->stats_mvp ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="stats_mvp">MVP</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="stats_goals" name="stats_goals" {{ $competition->stats_goals ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="stats_goals">Goleadores</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="stats_assists" name="stats_assists" {{ $competition->stats_assists ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="stats_assists">Asistencias</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="stats_yellow_cards" name="stats_yellow_cards" {{ $competition->stats_yellow_cards ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="stats_yellow_cards">Tarjetas Amarillas</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="stats_red_cards" name="stats_red_cards" {{ $competition->stats_red_cards ? 'checked' : '' }}>
+                        <label class="custom-control-label" for="stats_red_cards">Tarjetas Rojas</label>
+                    </div>
+                </div>
+            </div>
+        @endif
+
     </div>
 
     <div class="table-form-footer col-12 col-lg-8 col-xl-6 pt-3 px-3 px-md-0">

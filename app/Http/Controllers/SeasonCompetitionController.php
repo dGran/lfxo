@@ -121,8 +121,8 @@ class SeasonCompetitionController extends Controller
 
     public function add($season_id)
     {
-        $season_name = Season::find($season_id)->name;
-        return view('admin.seasons_competitions.add', compact('season_id', 'season_name'));
+        $season = Season::find($season_id);
+        return view('admin.seasons_competitions.add', compact('season'));
     }
 
     public function save()
@@ -140,10 +140,15 @@ class SeasonCompetitionController extends Controller
             'img.dimensions' => 'Las dimensiones de la imagen no son válidas'
         ]);
 
+
         $data = request()->all();
         $data['season_id'] = request()->season_id;
         $data['slug'] = str_slug(request()->name);
-
+        $data['stats_mvp'] = request()->stats_mvp ? 1 : 0;
+        $data['stats_goals'] = request()->stats_goals ? 1 : 0;
+        $data['stats_assists'] = request()->stats_assists ? 1 : 0;
+        $data['stats_yellow_cards'] = request()->stats_yellow_cards ? 1 : 0;
+        $data['stats_red_cards'] = request()->stats_red_cards ? 1 : 0;
 
         if (request()->url_img) {
             $data['img'] = request()->img_link;
@@ -208,6 +213,11 @@ class SeasonCompetitionController extends Controller
             $data = request()->all();
             $slug_text = str_slug(request()->name) . '_' . $competition->id;
             $data['slug'] = $slug_text;
+            $data['stats_mvp'] = request()->stats_mvp ? 1 : 0;
+            $data['stats_goals'] = request()->stats_goals ? 1 : 0;
+            $data['stats_assists'] = request()->stats_assists ? 1 : 0;
+            $data['stats_yellow_cards'] = request()->stats_yellow_cards ? 1 : 0;
+            $data['stats_red_cards'] = request()->stats_red_cards ? 1 : 0;
 
             if (request()->url_img) {
                 $data['img'] = request()->img_link;
@@ -264,15 +274,7 @@ class SeasonCompetitionController extends Controller
 
         if ($competition) {
             $message = 'Se ha eliminado la competición "' . $competition->name . '" correctamente.';
-
-            if ($competition->isLocalImg()) {
-                if (\File::exists(public_path($competition->img))) {
-                    \File::delete(public_path($competition->img));
-                }
-            }
-            event(new TableWasDeleted($competition, $competition->name));
-            $competition->delete();
-
+            $this->destroy_competition($competition);
             return redirect()->route('admin.season_competitions')->with('success', $message);
         } else {
             $message = 'Acción cancelada. La competición que querías eliminar ya no existe. Se ha actualizado la lista';
@@ -289,13 +291,7 @@ class SeasonCompetitionController extends Controller
             $competition = SeasonCompetition::find($ids[$i]);
             if ($competition) {
                 $counter = $counter +1;
-                if ($competition->isLocalImg()) {
-                    if (\File::exists(public_path($competition->img))) {
-                        \File::delete(public_path($competition->img));
-                    }
-                }
-                event(new TableWasDeleted($competition, $competition->name));
-                $competition->delete();
+                $this->destroy_competition($competition);
             }
         }
         if ($counter > 0) {

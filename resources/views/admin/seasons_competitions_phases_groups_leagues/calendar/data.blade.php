@@ -1,39 +1,43 @@
-<div class="table-form-content px-3 col-12 mb-0 mb-md-2 animated fadeIn">
-	<form
-	    id="frmGenerate"
-	    lang="{{ app()->getLocale() }}"
-	    role="form"
-	    method="POST"
-	    action="{{ route('admin.season_competitions_phases_groups_leagues.calendar.generate', [$group->phase->competition->slug, $group->phase->slug, $group->slug]) }}"
-	    enctype="multipart/form-data"
-	    data-toggle="validator"
-	    autocomplete="off">
-	    {{ csrf_field() }}
+@if ($group->participants->count() == $group->num_participants)
+	<div class="table-form-content px-3 col-12 mb-0 mb-md-2 animated fadeIn">
+		<form
+		    id="frmGenerate"
+		    lang="{{ app()->getLocale() }}"
+		    role="form"
+		    method="POST"
+		    action="{{ route('admin.season_competitions_phases_groups_leagues.calendar.generate', [$group->phase->competition->slug, $group->phase->slug, $group->slug]) }}"
+		    enctype="multipart/form-data"
+		    data-toggle="validator"
+		    autocomplete="off">
+		    {{ csrf_field() }}
 
-		<div class="form-group row pt-2">
-			<div class="col-12">
-			    <div class="custom-control custom-checkbox">
-			        <input type="checkbox" class="custom-control-input" id="second_round" name="second_round">
-			        <label class="custom-control-label" for="second_round">Partidos de ida y vuelta</label>
-			    </div>
-			    <div class="custom-control custom-checkbox">
-			        <input type="checkbox" class="custom-control-input" id="inverse_order" name="inverse_order" disabled>
-			        <label class="custom-control-label text-muted" id="lbinverse_order" for="inverse_order">Orden inverso para la segunda vuelta</label>
+			<div class="form-group row pt-2">
+				<div class="col-12">
+				    <div class="custom-control custom-checkbox">
+				        <input type="checkbox" class="custom-control-input" id="second_round" name="second_round">
+				        <label class="custom-control-label" for="second_round">Partidos de ida y vuelta</label>
+				    </div>
+				    <div class="custom-control custom-checkbox">
+				        <input type="checkbox" class="custom-control-input" id="inverse_order" name="inverse_order" disabled>
+				        <label class="custom-control-label text-muted" id="lbinverse_order" for="inverse_order">Orden inverso para la segunda vuelta</label>
+				    </div>
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-12">
+					<a id="btnGenerate" href="" class="btn btn-primary border border-primary">
+			    		<i class="fas fa-magic mr-2"></i>
+			    		Generar calendario
+					</a>
 			    </div>
 			</div>
-		</div>
 
-		<div class="form-group row">
-			<div class="col-12">
-				<a id="btnGenerate" href="" class="btn btn-primary border border-primary">
-		    		<i class="fas fa-magic mr-2"></i>
-		    		Generar calendario
-				</a>
-		    </div>
-		</div>
-
-	</form>
-</div>
+		</form>
+	</div>
+@else
+	<h5 class="py-3 text-center text-danger animated flash infinite text-uppercase">Lista de participantes no completada</h5>
+@endif
 
 <div class="table-form-content col-12 animated fadeIn p-0 border-0">
 	@if ($league->days->count() == 0)

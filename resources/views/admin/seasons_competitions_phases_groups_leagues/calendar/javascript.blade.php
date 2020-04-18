@@ -2,8 +2,8 @@
     var competition_slug = {!! json_encode($group->phase->competition->slug) !!};
     var phase_slug = {!! json_encode($group->phase->slug) !!};
     var group_slug = {!! json_encode($group->slug) !!};
-    var goals = {!! json_encode($league->stats_goals) !!};
-    var assists = {!! json_encode($league->stats_assists) !!};
+    var goals = {!! json_encode($group->phase->competition->stats_goals) !!};
+    var assists = {!! json_encode($group->phase->competition->stats_assists) !!};
 
     $(function() {
     	$("#second_round").click(function(){

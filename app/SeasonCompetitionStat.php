@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LeagueStat extends Model
+class SeasonCompetitionStat extends Model
 {
 	public $timestamps = false;
-	protected $table = 'leagues_stats';
+	protected $table = 'season_competitions_stats';
 
-    public function league()
+    public function competition()
     {
-        return $this->hasOne('App\SeasonCompetitionPhaseGroupLeague', 'id', 'league_id');
+        return $this->hasOne('App\SeasonCompetition', 'id', 'competition_id');
     }
 
     public function match()
@@ -42,12 +42,11 @@ class LeagueStat extends Model
         }
     }
 
-    public function stat_detail($stat, $league_id, $player_id)
+    public function stat_detail($stat, $competition_id, $player_id)
     {
-        return LeagueStat::where('league_id', '=', $league_id)
+        return SeasonCompetitionStat::where('competition_id', '=', $competition_id)
             ->where('player_id', '=', $player_id)
             ->where($stat, '>' , 0)
-            ->orderBy('day_id', 'asc')
             ->get();
     }
 }

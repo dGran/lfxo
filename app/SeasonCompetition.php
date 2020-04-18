@@ -9,7 +9,7 @@ class SeasonCompetition extends Model
 	public $timestamps = false;
 
     protected $fillable = [
-        'season_id', 'name', 'img', 'slug'
+        'season_id', 'name', 'img', 'stats_mvp', 'stats_goals', 'stats_assists', 'stats_yellow_cards', 'stats_red_cards', 'slug'
     ];
 
     public function season()
@@ -20,6 +20,15 @@ class SeasonCompetition extends Model
     public function phases()
     {
         return $this->hasmany('App\SeasonCompetitionPhase', 'competition_id', 'id');
+    }
+
+    public function has_stats()
+    {
+        if ($this->stats_mvp || $this->stats_goals || $this->stats_assists || $this->stats_yellow_cards || $this->stats_red_cards) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function initialPhase()

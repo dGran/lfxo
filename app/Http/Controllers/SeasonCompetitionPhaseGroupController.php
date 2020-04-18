@@ -35,7 +35,7 @@ class SeasonCompetitionPhaseGroupController extends Controller
             'name' => 'required',
         ],
         [
-            'name.required' => 'El nombre de la fase es obligatorio',
+            'name.required' => 'El nombre del grupo es obligatorio',
         ]);
 
         $phase = SeasonCompetitionPhase::where('slug','=', $phase_slug)->firstOrFail();
@@ -84,7 +84,7 @@ class SeasonCompetitionPhaseGroupController extends Controller
                 'name' => 'required',
             ],
             [
-                'name.required' => 'El nombre de la fase es obligatorio',
+                'name.required' => 'El nombre del grupo es obligatorio',
             ]);
 
             $data = request()->all();
@@ -115,9 +115,7 @@ class SeasonCompetitionPhaseGroupController extends Controller
 
         if ($group) {
             $message = 'Se ha eliminado el grupo "' . $group->name . '" correctamente.';
-            event(new TableWasDeleted($group, $group->name));
-            $group->delete();
-
+            $this->destroy_group($group);
             return redirect()->route('admin.season_competitions_phases_groups', [$competition_slug, $phase_slug])->with('success', $message);
         } else {
             $message = 'Acción cancelada. El grupo que querías eliminar ya no existe. Se ha actualizado la lista';
@@ -134,8 +132,7 @@ class SeasonCompetitionPhaseGroupController extends Controller
             $group = SeasonCompetitionPhaseGroup::find($ids[$i]);
             if ($group) {
                 $counter = $counter +1;
-                event(new TableWasDeleted($group, $group->name));
-                $group->delete();
+                $this->destroy_group($group);
             }
         }
         if ($counter > 0) {

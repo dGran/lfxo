@@ -20,20 +20,11 @@
 						</a>
 					</li>
 					<li>
-						@if ($competition->initialPhase()->mode == 'league')
-							@if ($competition->initialPhase()->initialGroup()->league && $competition->initialPhase()->initialGroup()->league->has_stats())
-								<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.stats', [$season_slug, $competition->slug]) }}">
-									<i class="fas fa-caret-right mr-1"></i>
-									Estadísticas
-								<a>
-							@endif
-						@else
-							@if ($competition->initialPhase()->initialGroup()->league && $competition->initialPhase()->initialGroup()->playoff->has_stats())
-								<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.stats', [$season_slug, $competition->slug]) }}">
-									<i class="fas fa-caret-right mr-1"></i>
-									Estadísticas
-								<a>
-							@endif
+						@if ($competition->has_stats())
+							<a class="{{ !$competition->initialPhase()->active ? 'disabled' : '' }}" href="{{ route('competitions.stats', [$season_slug, $competition->slug]) }}">
+								<i class="fas fa-caret-right mr-1"></i>
+								Estadísticas
+							<a>
 						@endif
 					</li>
 				</ul>

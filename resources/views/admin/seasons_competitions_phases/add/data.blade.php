@@ -13,7 +13,7 @@
         <div class="form-group row pt-2">
             <label for="name" class="col-sm-3 col-form-label">Nombre</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control {{ $errors->first('name') ? 'invalid' : '' }}" id="name" name="name" placeholder="Nombre" autofocus value="{{ old('name') }}">
+                <input type="text" class="form-control {{ $errors->first('name') ? 'invalid' : '' }}" id="name" name="name" placeholder="Nombre" autofocus value="{{ old('name', $competition->name) }}">
                 @if ($errors->first('name'))
                     <small class="text-danger">{{ $errors->first('name') }}</small>
                 @endif

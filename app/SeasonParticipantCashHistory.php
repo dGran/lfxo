@@ -9,7 +9,7 @@ class SeasonParticipantCashHistory extends Model
 	protected $table = "season_participant_cash_history";
 
     protected $fillable = [
-        'participant_id', 'description', 'amount', 'movement'
+        'participant_id', 'description', 'amount', 'movement', 'match_id', 'transfer_id', 'trade_id'
     ];
 
     public function participant()

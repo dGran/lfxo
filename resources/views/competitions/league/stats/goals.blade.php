@@ -81,7 +81,7 @@
 					</tr>
 					<tr class="detail d-none animated" id="{{ 'goals'.$stat->player_id }}">
 						<td colspan="4">
-							@foreach ($stat->stat_detail('goals', $league->id, $stat->player->id) as $detail)
+							@foreach ($stat->stat_detail('goals', $competition->id, $stat->player->id) as $detail)
 								<div class="list clearfix text-muted">
 									<div class="d-inline-block float-left" style="width: 70px">
 										Jornada {{ $detail->match->day->order }}
