@@ -28,8 +28,6 @@ class PlayOffController extends Controller
     {
     	$group = SeasonCompetitionPhaseGroup::where('slug', '=', $group_slug)->firstOrFail();
         $playoff = $this->check_playoff($group);
-        // $playoff = PlayOff::where('group_id', '=', $group->id)->get()->first();
-        // dd($playoff);
 
         return view('admin.seasons_competitions_phases_groups_playoffs.index', compact('group', 'playoff'));
     }
@@ -37,11 +35,6 @@ class PlayOffController extends Controller
     public function update($id) {
     	$playoff = PlayOff::find($id);
     	$playoff->predefined_rounds = request()->predefined_rounds;
-    	$playoff->stats_mvp = request()->stats_mvp ? 1 : 0;
-    	$playoff->stats_goals = request()->stats_goals ? 1 : 0;
-    	$playoff->stats_assists = request()->stats_assists ? 1 : 0;
-    	$playoff->stats_yellow_cards = request()->stats_yellow_cards ? 1 : 0;
-    	$playoff->stats_red_cards = request()->stats_red_cards ? 1 : 0;
     	$playoff->save();
 
     	return back()->with('success', 'Configuración del playoff actualizada correctamente');
@@ -55,15 +48,9 @@ class PlayOffController extends Controller
         }
 		$round->double_value = request()->playoff_type == 2 ? 1 : 0;
     	$round->date_limit = request()->date_limit;
-        if (!is_null(request()->play_amount)) {
-    	   $round->play_amount = request()->play_amount;
-        }
-        if (!is_null(request()->play_ontime_amount)) {
-    	   $round->play_ontime_amount = request()->play_ontime_amount;
-        }
-        if (!is_null(request()->win_amount)) {
-    	   $round->win_amount = request()->win_amount;
-        }
+        $round->win_amount = is_null(request()->win_amount) ? 0 : request()->win_amount;
+        $round->play_amount = is_null(request()->play_amount) ? 0 : request()->play_amount;
+        $round->play_ontime_amount = is_null(request()->play_ontime_amount) ? 0 : request()->play_ontime_amount;
     	$round->save();
 
     	foreach ($round->clashes as $clash) {
@@ -376,7 +363,7 @@ class PlayOffController extends Controller
             }
             $match->save();
 
-            if ($playoff->has_stats()) {
+            if ($match->competition()->has_stats()) {
                 $this->assing_stats($match);
             }
 
@@ -476,80 +463,6 @@ class PlayOffController extends Controller
             $match->active = 1;
 			$match->save();
 		}
-    }
-
-    protected function assing_stats($match) {
-        $local_players = SeasonPlayer::where('participant_id', '=', $match->local_participant->participant->id)->get();
-        foreach ($local_players as $player) {
-            if ($match->clash->round->playoff->stats_goals) {
-                $goals = request()->{"stats_goals_".$player->id};
-            } else {
-                $goals = 0;
-            }
-            if ($match->clash->round->playoff->stats_assists) {
-                $assists = request()->{"stats_assists_".$player->id};
-            } else {
-                $assists = 0;
-            }
-            if ($match->clash->round->playoff->stats_yellow_cards) {
-                $yellow_cards = request()->{"stats_yellow_cards_".$player->id};
-            } else {
-                $yellow_cards = 0;
-            }
-            if ($match->clash->round->playoff->stats_red_cards) {
-                $red_cards = request()->{"stats_red_cards_".$player->id};
-            } else {
-                $red_cards = 0;
-            }
-            if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
-                $stat = new PlayOffStat;
-                $stat->match_id = $match->id;
-                $stat->clash_id = $match->clash->id;
-                $stat->playoff_id = $match->clash->round->playoff->id;
-                $stat->player_id = $player->id;
-                if ($goals > 0) { $stat->goals = $goals; }
-                if ($assists > 0) { $stat->assists = $assists; }
-                if ($yellow_cards > 0) { $stat->yellow_cards = $yellow_cards; }
-                if ($red_cards > 0) { $stat->red_cards = $red_cards; }
-                $stat->save();
-            }
-        }
-
-        $visitor_players = SeasonPlayer::where('participant_id', '=', $match->visitor_participant->participant->id)->get();
-        foreach ($visitor_players as $player) {
-            if ($match->clash->round->playoff->stats_goals) {
-                $goals = request()->{"stats_goals_".$player->id};
-            } else {
-                $goals = 0;
-            }
-            if ($match->clash->round->playoff->stats_assists) {
-                $assists = request()->{"stats_assists_".$player->id};
-            } else {
-                $assists = 0;
-            }
-            if ($match->clash->round->playoff->stats_yellow_cards) {
-                $yellow_cards = request()->{"stats_yellow_cards_".$player->id};
-            } else {
-                $yellow_cards = 0;
-            }
-            if ($match->clash->round->playoff->stats_red_cards) {
-                $red_cards = request()->{"stats_red_cards_".$player->id};
-            } else {
-                $red_cards = 0;
-            }
-            if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
-                $stat = new PlayOffStat;
-                $stat->match_id = $match->id;
-                $stat->clash_id = $match->clash->id;
-                $stat->playoff_id = $match->clash->round->playoff->id;
-                $stat->player_id = $player->id;
-                if ($goals > 0) { $stat->goals = $goals; }
-                if ($assists > 0) { $stat->assists = $assists; }
-                if ($yellow_cards > 0) { $stat->yellow_cards = $yellow_cards; }
-                if ($red_cards > 0) { $stat->red_cards = $red_cards; }
-                $stat->save();
-            }
-        }
     }
 
     protected function assing_economy($match) {

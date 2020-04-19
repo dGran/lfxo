@@ -26,38 +26,6 @@
                         </div>
                     </div>
 
-                    @if ($playoff->group->phase->competition->season->use_rosters)
-                        <h5 class="pb-3 m-0"><strong>Estadísticas</strong></h5>
-                        <div class="form-group row">
-                            <div class="col-6 col-lg-3">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="stats_mvp" name="stats_mvp" {{ $playoff && $playoff->stats_mvp ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="stats_mvp">MVP</label>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="stats_goals" name="stats_goals" {{ $playoff && $playoff->stats_goals ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="stats_goals">Goleadores</label>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="stats_assists" name="stats_assists" {{ $playoff && $playoff->stats_assists ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="stats_assists">Asistencias</label>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="stats_yellow_cards" name="stats_yellow_cards" {{ $playoff && $playoff->stats_yellow_cards ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="stats_yellow_cards">Tarjetas Amarillas</label>
-                                </div>
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="stats_red_cards" name="stats_red_cards" {{ $playoff && $playoff->stats_red_cards ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="stats_red_cards">Tarjetas Rojas</label>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-
                     <div class="form-group row">
                         <div class="col-12">
                             <input type="submit" class="btn btn-primary" value="Guardar cambios">
@@ -73,30 +41,34 @@
 
         </div>
 
-        <div class="pb-3">
-            <h5 class="py-3 m-0 border-top"><strong>Rondas</strong></h5>
-            @if ($playoff->rounds->count() == 0)
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type_round" id="unique_round" value="1">
-                    <label class="form-check-label" for="unique_round">
-                        Ronda única
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="type_round" id="complete_playoff" value="0" checked>
-                    <label class="form-check-label" for="complete_playoff">
-                        Playoff completo
-                    </label>
-                </div>
-                <a href="" id="btnGenerateRounds" class="btn btn-primary mt-3" data-id={{ $playoff->id }}>
-                    Generar rondas
-                </a>
-            @else
-                <a href="" id="btnResetRounds" class="btn btn-danger" data-id={{ $playoff->id }}>
-                    Resetear todas las rondas
-                </a>
-            @endif
-        </div>
+        @if ($group->participants->count() == $group->num_participants)
+            <div class="pb-3">
+                <h5 class="py-3 m-0 border-top"><strong>Rondas</strong></h5>
+                @if ($playoff->rounds->count() == 0)
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type_round" id="unique_round" value="1">
+                        <label class="form-check-label" for="unique_round">
+                            Ronda única
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="type_round" id="complete_playoff" value="0" checked>
+                        <label class="form-check-label" for="complete_playoff">
+                            Playoff completo
+                        </label>
+                    </div>
+                    <a href="" id="btnGenerateRounds" class="btn btn-primary mt-3" data-id={{ $playoff->id }}>
+                        Generar rondas
+                    </a>
+                @else
+                    <a href="" id="btnResetRounds" class="btn btn-danger" data-id={{ $playoff->id }}>
+                        Resetear todas las rondas
+                    </a>
+                @endif
+            </div>
+        @else
+            <h5 class="py-3 text-center text-danger animated flash infinite text-uppercase">Lista de participantes no completada</h5>
+        @endif
     </div>
 </div>
 

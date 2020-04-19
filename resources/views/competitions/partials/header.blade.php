@@ -1,14 +1,14 @@
 <div class="competition-header">
 	<div class="container">
 		<div class="logo">
-			<img src="{{ asset($group->phase->competition->getImgFormatted()) }}" width="55" class="rounded">
+			<img src="{{ asset($competition->getImgFormatted()) }}" width="55" class="rounded">
 		</div>
 		<div class="title">
     		<h3>
-    			{{ $group->phase->competition->name }}
+    			{{ $competition->name }}
     		</h3>
     		<span class="subtitle">
-    			{{ $group->phase->competition->season->name }}
+    			{{ $competition->season->name }}
     		</span>
 		</div>
 	</div>

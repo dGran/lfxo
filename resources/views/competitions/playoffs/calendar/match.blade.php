@@ -82,11 +82,11 @@
 
                 </table>
 
-            	@if ($match->clash->round->playoff->has_stats())
+            	@if ($competition->has_stats())
                 	<div id="accordion" class="p-3">
                     	<div class="card mb-1">
                         	<div class="card-header p-0 m-0 border-bottom-0">
-                                <a class="card-title accordion-toggle d-block m-0 px-3 py-2 {{ !$match->clash->round->playoff->has_stats() ? 'disabled' : '' }}" data-toggle="collapse" data-parent="#accordion" href="#stats">Estadísticas</a>
+                                <a class="card-title accordion-toggle d-block m-0 px-3 py-2 {{ !$competition->has_stats() ? 'disabled' : '' }}" data-toggle="collapse" data-parent="#accordion" href="#stats">Estadísticas</a>
                             </div>
 
                             <div class="card-collapse collapse border-top" id="stats">
@@ -98,7 +98,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link {{ $match->visitor_participant->participant->players->count()==0 ? "disabled" : "" }}" id="visitor-tab" data-toggle="tab" href="#visitor" role="tab" aria-controls="visitor" aria-selected="false">{{ $match->visitor_participant->participant->name() }}</a>
                                         </li>
-                                        <li class="nav-item {{ $match->clash->round->playoff->stats_mvp ? "" : "d-none" }}">
+                                        <li class="nav-item {{ $competition->stats_mvp ? "" : "d-none" }}">
                                             <a class="nav-link" id="mvp-tab" data-toggle="tab" href="#mvp" role="tab" aria-controls="mvp" aria-selected="false">MVP</a>
                                         </li>
                                     </ul>
@@ -109,19 +109,19 @@
                                                 @if ($match->local_participant->participant->players->count() > 0)
                                                     <tr class="">
                                                         <td></td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_goals ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_goals ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Goles</small> --}}
                                                             <i class="fas fa-futbol"></i>
                                                         </td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_assists ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_assists ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Asis.</small> --}}
                                                             <i class="icon-soccer-assist"></i>
                                                         </td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_yellow_cards ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_yellow_cards ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Amarilla</small> --}}
                                                             <i class="icon-soccer-card text-warning"></i>
                                                         </td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_red_cards ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_red_cards ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Roja</small> --}}
                                                             <i class="icon-soccer-card text-danger"></i>
                                                         </td>
@@ -132,16 +132,16 @@
                                                                 <img src="{{ $player->player->getImgFormatted() }}" alt="" width="24">
                                                                 <small>{{ $player->player->name }}</small>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_goals ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_goals ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_goals_{{$player->id}}" class="local_goals form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_assists ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_assists ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_assists_{{$player->id}}" class="local_assists form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_yellow_cards ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_yellow_cards ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_yellow_cards_{{$player->id}}" class="local_yellow-cards form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0 max=1>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_red_cards ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_red_cards ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_red_cards_{{$player->id}}" class="local_red-cards form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0 max=1>
                                                             </td>
                                                         </tr>
@@ -151,10 +151,10 @@
                                                             <img src="{{ $match->visitor_participant->participant->logo() }}" alt="" width="24">
                                                             <small class="text-uppercase">autogol</small>
                                                         </td>
-                                                        <td colspan="{{ !$match->clash->round->playoff->stats_assists ? 4 : 0 }}" class="data {{ !$match->clash->round->playoff->stats_goals ? 'd-none' : '' }} bg-light">
+                                                        <td colspan="{{ !$competition->stats_assists ? 4 : 0 }}" class="data {{ !$competition->stats_goals ? 'd-none' : '' }} bg-light">
                                                             <input type="number" class="local_goals form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                         </td>
-                                                        <td colspan="3" class="data {{ !$match->clash->round->playoff->stats_assists ? 'd-none' : '' }} bg-light">
+                                                        <td colspan="3" class="data {{ !$competition->stats_assists ? 'd-none' : '' }} bg-light">
                                                             <input type="number" class="local_assists form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                         </td>
                                                     </tr>
@@ -175,19 +175,19 @@
                                                 @if ($match->visitor_participant->participant->players->count() > 0)
                                                     <tr class="">
                                                         <td></td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_goals ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_goals ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Goles</small> --}}
                                                             <i class="fas fa-futbol"></i>
                                                         </td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_assists ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_assists ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Asis.</small> --}}
                                                             <i class="icon-soccer-assist"></i>
                                                         </td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_yellow_cards ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_yellow_cards ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Amarilla</small> --}}
                                                             <i class="icon-soccer-card text-warning"></i>
                                                         </td>
-                                                        <td class="text-center {{ !$match->clash->round->playoff->stats_red_cards ? 'd-none' : '' }}">
+                                                        <td class="text-center {{ !$competition->stats_red_cards ? 'd-none' : '' }}">
                                                             {{-- <small class="d-block">Roja</small> --}}
                                                             <i class="icon-soccer-card text-danger"></i>
                                                         </td>
@@ -198,16 +198,16 @@
                                                                 <img src="{{ $player->player->getImgFormatted() }}" alt="" width="24">
                                                                 <small>{{ $player->player->name }}</small>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_goals ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_goals ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_goals_{{$player->id}}" class="visitor_goals form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_assists ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_assists ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_assists_{{$player->id}}" class="visitor_assists form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_yellow_cards ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_yellow_cards ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_yellow_cards_{{$player->id}}" class="visitor_yellow-cards form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0 max=1>
                                                             </td>
-                                                            <td class="data {{ !$match->clash->round->playoff->stats_red_cards ? 'd-none' : '' }}">
+                                                            <td class="data {{ !$competition->stats_red_cards ? 'd-none' : '' }}">
                                                                 <input type="number" name="stats_red_cards_{{$player->id}}" class="visitor_red-cards form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0 max=1>
                                                             </td>
                                                         </tr>
@@ -217,10 +217,10 @@
                                                             <img src="{{ $match->local_participant->participant->logo() }}" alt="" width="24">
                                                             <small class="text-uppercase">autogol</small>
                                                         </td>
-                                                        <td  colspan="{{ !$match->clash->round->playoff->stats_assists ? 4 : 0 }}" class="data {{ !$match->clash->round->playoff->stats_goals ? 'd-none' : '' }} bg-light">
+                                                        <td  colspan="{{ !$competition->stats_assists ? 4 : 0 }}" class="data {{ !$competition->stats_goals ? 'd-none' : '' }} bg-light">
                                                             <input type="number" class="visitor_goals form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                         </td>
-                                                        <td colspan="3" class="data {{ !$match->clash->round->playoff->stats_assists ? 'd-none' : '' }} bg-light">
+                                                        <td colspan="3" class="data {{ !$competition->stats_assists ? 'd-none' : '' }} bg-light">
                                                             <input type="number" class="visitor_assists form-control" style="font-size: 80%; width: 3em; padding: 0.2em 0.4em" min=0>
                                                         </td>
                                                     </tr>
@@ -262,7 +262,7 @@
 
 
             <div class="border-top p-3 bg-light">
-                <a href="" id="btn_updateMatch" class="btn btn-primary disabled" onclick="updateMatch({{ $match->clash->round->playoff->stats_goals }}, {{ $match->clash->round->playoff->stats_assists }})" id="send_result">
+                <a href="" id="btn_updateMatch" class="btn btn-primary disabled" onclick="updateMatch({{ $competition->stats_goals }}, {{ $competition->stats_assists }})" id="send_result">
                 	Enviar resultado
                 </a>
             </div>

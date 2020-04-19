@@ -24,10 +24,11 @@
 
 	@section('modal')
 	    @include('competitions.league.calendar.update_modal')
-	    @include('competitions.league.calendar.match_details_modal')
+	    @include('general_modals.match_details_modal')
 	@endsection
 
 	@section('js')
 	    @include('competitions.league.calendar.javascript')
+	    @include('general_js.match_details')
 	@endsection
 @endif

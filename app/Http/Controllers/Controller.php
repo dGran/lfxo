@@ -8,7 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use App\SeasonParticipant;
+use App\SeasonPlayer;
 use App\SeasonParticipantCashHistory as Cash;
+use App\SeasonCompetitionStat;
 
 use App\Events\TableWasDeleted;
 
@@ -31,6 +33,81 @@ class Controller extends BaseController
 	    $cash->movement = $movement;
 	    $cash->save();
 	}
+
+    protected function assing_stats($match) {
+    	$competition = $match->competition();
+
+        $local_players = SeasonPlayer::where('participant_id', '=', $match->local_participant->participant->id)->get();
+        foreach ($local_players as $player) {
+            if ($competition->stats_goals) {
+                $goals = request()->{"stats_goals_".$player->id};
+            } else {
+                $goals = 0;
+            }
+            if ($competition->stats_assists) {
+                $assists = request()->{"stats_assists_".$player->id};
+            } else {
+                $assists = 0;
+            }
+            if ($competition->stats_yellow_cards) {
+                $yellow_cards = request()->{"stats_yellow_cards_".$player->id};
+            } else {
+                $yellow_cards = 0;
+            }
+            if ($competition->stats_red_cards) {
+                $red_cards = request()->{"stats_red_cards_".$player->id};
+            } else {
+                $red_cards = 0;
+            }
+
+            if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
+                $stat = new SeasonCompetitionStat;
+                $stat->match_id = $match->id;
+                $stat->competition_id = $competition->id;
+                $stat->player_id = $player->id;
+                if ($goals > 0) { $stat->goals = $goals; }
+                if ($assists > 0) { $stat->assists = $assists; }
+                if ($yellow_cards > 0) { $stat->yellow_cards = $yellow_cards; }
+                if ($red_cards > 0) { $stat->red_cards = $red_cards; }
+                $stat->save();
+            }
+        }
+
+        $visitor_players = SeasonPlayer::where('participant_id', '=', $match->visitor_participant->participant->id)->get();
+        foreach ($visitor_players as $player) {
+            if ($competition->stats_goals) {
+                $goals = request()->{"stats_goals_".$player->id};
+            } else {
+                $goals = 0;
+            }
+            if ($competition->stats_assists) {
+                $assists = request()->{"stats_assists_".$player->id};
+            } else {
+                $assists = 0;
+            }
+            if ($competition->stats_yellow_cards) {
+                $yellow_cards = request()->{"stats_yellow_cards_".$player->id};
+            } else {
+                $yellow_cards = 0;
+            }
+            if ($competition->stats_red_cards) {
+                $red_cards = request()->{"stats_red_cards_".$player->id};
+            } else {
+                $red_cards = 0;
+            }
+            if ($goals > 0 || $assists > 0 || $yellow_cards > 0 || $red_cards > 0) {
+                $stat = new SeasonCompetitionStat;
+                $stat->match_id = $match->id;
+                $stat->competition_id = $competition->id;
+                $stat->player_id = $player->id;
+                if ($goals > 0) { $stat->goals = $goals; }
+                if ($assists > 0) { $stat->assists = $assists; }
+                if ($yellow_cards > 0) { $stat->yellow_cards = $yellow_cards; }
+                if ($red_cards > 0) { $stat->red_cards = $red_cards; }
+                $stat->save();
+            }
+        }
+    }
 
 	protected function destroy_group($group) {
 	    foreach ($group->participants as $participant) {

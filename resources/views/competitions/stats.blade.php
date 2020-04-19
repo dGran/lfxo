@@ -9,12 +9,12 @@
 	@include('competitions.partials.header')
 
 	<div class="wrapper" style="background: #f9f9f9">
-		@include('competitions.league.stats.content')
+		@include('competitions.stats.content')
 	</div> {{-- wrapper --}}
 @endsection
 
 @section('breadcrumb')
-	@include('competitions.league.stats.breadcrumb')
+	@include('competitions.stats.breadcrumb')
 @endsection
 
 @section('bottom-fixed')
@@ -22,5 +22,5 @@
 @endsection
 
 @section('js')
-    @include('competitions.league.stats.javascript')
+    @include('competitions.stats.javascript')
 @endsection

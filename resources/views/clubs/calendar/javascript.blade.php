@@ -1,15 +1,8 @@
 <script>
-    var season_slug = {!! json_encode(active_season()->slug) !!};
-
     $(function() {
-        // $('#matchDetailsModal').on('show.bs.modal', function(e) {
-
-        // });
-
         $("#matchDetailsModal").on("hidden.bs.modal", function(){
             $('#modal-dialog-match-details').html("");
         });
-
     });
 
     function item_enter(id) {

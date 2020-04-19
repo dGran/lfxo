@@ -18,12 +18,12 @@
 	@include('clubs.calendar.breadcrumb')
 @endsection
 
-@section('modal')
-    @include('competitions.league.calendar.match_details_modal')
-@endsection
-
 @section('bottom-fixed')
 	@include('clubs.partials.bottom_fixed')
+@endsection
+
+@section('modal')
+    @include('general_modals.match_details_modal')
 @endsection
 
 @section('js')

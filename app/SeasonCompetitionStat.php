@@ -47,6 +47,7 @@ class SeasonCompetitionStat extends Model
         return SeasonCompetitionStat::where('competition_id', '=', $competition_id)
             ->where('player_id', '=', $player_id)
             ->where($stat, '>' , 0)
+            ->orderBy('match_id', 'asc')
             ->get();
     }
 }

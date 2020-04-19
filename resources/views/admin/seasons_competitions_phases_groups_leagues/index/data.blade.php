@@ -39,7 +39,7 @@
                 <input type="number" class="form-control" id="draw_points" name="draw_points" placeholder="Puntos por empate" min="0" step=".5" value="{{ old('draw_points', $league ? $league->draw_points : 1) }}">
             </div>
             <div class="col-6 col-lg-3 mt-3 mt-lg-0">
-                <label for="play_points">Puntos por derrota</label>
+                <label for="lose_points">Puntos por derrota</label>
                 <input type="number" class="form-control" id="lose_points" name="lose_points" placeholder="Puntos por derrota" min="0" step=".5" value="{{ old('lose_points', $league ? $league->lose_points : 0) }}">
             </div>
         </div>

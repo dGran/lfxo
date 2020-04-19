@@ -26,23 +26,6 @@
 	</div>
 @endif
 
-@if ($stats_goals->count() > 0 && $participant_id > 0)
-	<div class="row justify-content-center">
-		<div class="col-12 col-md-10 col-lg-8 px-3 px-md-0 py-3 animated fadeIn">
-			<div class="d-inline-block align-middle">
-				<figure class="bg-white border rounded-circle m-0 shadow" style="padding: 10px">
-					<img src="{{ $participant->logo() }}" width="40">
-				</figure>
-			</div>
-			<div class="d-inline-block align-middle pl-2">
-				<strong>{{ $participant->name() }}</strong>
-				<small class="text-muted d-block">
-					{{ $participant->sub_name() }}
-				</small>
-			</div>
-		</div>
-	</div>
-@endif
 <div class="row justify-content-center">
 	<div class="col-12 col-md-10 col-lg-8 px-0 py-3">
 		<div class="px-3 px-md-0 pb-2">
@@ -81,15 +64,33 @@
 					</tr>
 					<tr class="detail d-none animated" id="{{ 'goals'.$stat->player_id }}">
 						<td colspan="4">
-							@foreach ($stat->stat_detail('goals', $competition->id, $stat->player->id) as $detail)
-								<div class="list clearfix text-muted">
-									<div class="d-inline-block float-left" style="width: 70px">
-										Jornada {{ $detail->match->day->order }}
-									</div>
+							@foreach ($stat->stat_detail('goals', $competition->id, $stat->player_id) as $detail)
+								<div class="list clearfix">
 									<div class="d-inline-block float-left">
-										{{ $detail->match->match_result() }}
+										<span class="text-muted">
+											@if ($detail->match->day)
+												@if ($detail->match->day->league->group->phase->groups->count() > 1)
+													{{ $detail->match->day->league->group->name }} -
+												@endif
+												Jornada {{ $detail->match->day->order }}
+											@else
+												{{ $detail->match->clash->round->name }}
+												@if ($detail->match->clash->round->round_trip)
+													@if ($detail->match->order == 1)
+														<span>- Ida</span>
+													@else
+														<span>- Vuelta</span>
+													@endif
+												@endif
+											@endif
+										</span>
+										<span class="d-block">
+											<i class="fas fa-caret-right ml-2 mr-1"></i>
+											{{ $detail->match->match_result() }}
+										</span>
 									</div>
 									<div class="d-inline-block float-right text-right">
+										<br>
 										@for ($i = 0; $i < $detail->goals; $i++)
 										    <i class="fas fa-futbol"></i>
 										@endfor

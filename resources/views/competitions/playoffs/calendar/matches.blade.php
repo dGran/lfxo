@@ -35,9 +35,11 @@
 					{{ $match->local_score }} - {{ $match->visitor_score }}
 				</span>
     		@else
-				<span class="result rounded px-2 py-1 {{ $match->sanctioned_id ? 'text-white bg-danger' : '' }}">
-					{{ $match->local_score }} - {{ $match->visitor_score }}
-				</span>
+                <a href="" data-toggle="modal" data-target="#matchDetailsModal">
+                    <span class="result rounded px-2 py-1 {{ $match->sanctioned_id ? 'text-white bg-danger' : '' }}">
+                        {{ $match->local_score }} - {{ $match->visitor_score }}
+                    </span>
+                </a>
     		@endif
     	@endif
     </td>
