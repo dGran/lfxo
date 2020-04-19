@@ -174,17 +174,17 @@ class SeasonParticipantCashHistoryController extends Controller
             $participants = SeasonParticipant::seasonId($data['season_id'])->get();
             foreach ($participants as $participant) {
                 $data['participant_id'] = $participant->id;
-				$cash = SeasonParticipantCashHistory::create($data);
-				event(new TableWasSaved($cash, $cash->description));
-				if (request()->telegram) {
-			    	if ($data['movement'] == 'E') {
-			    		$action = 'ingresa';
-			    	} else {
-			    		$action = 'desembolsa';
-			    	}
-			    	$text = "\xF0\x9F\x92\xB2" . $participant->team->name . " (" . $participant->user->name . ") <b>" . $action . "</b> " . number_format($data['amount'], 2, ",", ".") . " mill. por " . "'<i>" . $data['description'] . "'</i>\n" . "Presupuesto " . $participant->team->name . ": " . number_format($participant->budget(), 2, ",", ".") . " mill.";
-                    $this->telegram_notification_channel($text);
-				}
+                $cash = SeasonParticipantCashHistory::create($data);
+                event(new TableWasSaved($cash, $cash->description));
+            }
+            if (request()->telegram) {
+                if ($data['movement'] == 'E') {
+                    $action = 'ingresan';
+                } else {
+                    $action = 'desembolsan';
+                }
+                $text = "\xF0\x9F\x92\xB2" . "Todos los equipos <b>" . $action . "</b> " . number_format($data['amount'], 2, ",", ".") . " mill.\n" . "     Concepto: <i>'" . $data['description'] . "'</i>\n\n";
+                $this->telegram_notification_channel($text);
             }
             if (request()->no_close) {
                 return back()->with('success', 'Nuevos registros registrados correctamente');
@@ -202,7 +202,7 @@ class SeasonParticipantCashHistoryController extends Controller
 			    	} else {
 			    		$action = 'desembolsa';
 			    	}
-			    	$text = "\xF0\x9F\x92\xB2" . $participant->team->name . " (" . $participant->user->name . ") <b>" . $action . "</b> " . number_format($data['amount'], 2, ",", ".") . " mill. por " . "'<i>" . $data['description'] . "'</i>\n" . "Presupuesto " . $participant->team->name . ": " . number_format($participant->budget(), 2, ",", ".") . " mill.";
+                    $text = "\xF0\x9F\x92\xB2" . $participant->team->name . " (" . $participant->user->name . ") <b>" . $action . "</b> " . number_format($data['amount'], 2, ",", ".") . " mill.\n" . "     Concepto: <i>'" . $data['description'] . "'</i>\n" . "     Presupuesto " . $participant->team->name . ": " . number_format($participant->budget(), 2, ",", ".") . " mill.\n\n";
                     $this->telegram_notification_channel($text);
 				}
 	            if (request()->no_close) {
@@ -376,29 +376,27 @@ class SeasonParticipantCashHistoryController extends Controller
             foreach ($participants as $participant) {
                 $cash = new SeasonParticipantCashHistory;
                 $cash->participant_id = $participant->id;
-                $cash->description = "Pago de salarios temporada '" . $season->name . "'";
+                $cash->description = "Pago de salarios '" . $season->name . "'";
                 $cash->amount = $participant->salaries();
                 $cash->movement = "S";
                 $cash->save();
-
                 event(new TableWasSaved($cash, $cash->description));
-
-                $text = "\xF0\x9F\x92\xB2" . $participant->team->name . " (" . $participant->user->name . ") <b>desembolsa</b> " . number_format($cash->amount, 2, ",", ".") . " mill. por " . "'<i>" . $cash->description . "'</i>\n" . "Presupuesto " . $participant->team->name . ": " . number_format($participant->budget(), 2, ",", ".") . " mill.";
-                $this->telegram_notification_channel($text);
             }
+
+            $text = "\xF0\x9F\x92\xB2" . "Todos los equipos han <b>pagado</b> los salarios de los jugadores.\n";
+            $this->telegram_notification_channel($text);
+
             $season->salaries_paid = 1;
             $season->save();
             if ($season->save()) {
                 event(new TableWasSaved($season, $season->name));
             }
-            return redirect()->route('admin.season_cash_history')->with('success', 'Pago de salarios realizado correctamente');
+            return back()->with('success', 'Pago de salarios realizado correctamente');
 
         } else {
             return back()->with('error', 'El pago de salarios de esta temporada ya se ha realizado');
         }
     }
-
-
 
 
     /*
