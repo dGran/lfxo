@@ -14,7 +14,7 @@
 							<div class="ribbon rb-left rb-danger"><span>Plazo vencido</span></div>
 						@endif
 					@else
-						<div class="ribbon rb-info">Plazo N/D</span>
+						<div class="ribbon rb-left rb-info"><span>Plazo N/D</span></div>
 					@endif
 
 					<div class="row align-items-center">

@@ -190,6 +190,8 @@ class SeasonController extends Controller
             } else {
                 $data['initial_budget'] = (is_null(request()->initial_budget)) ? 0 : request()->initial_budget;
             }
+            $data['salaries_paid'] = (is_null(request()->salaries_paid)) ? 0 : 1;
+
             $data['use_rosters'] = (is_null(request()->use_rosters)) ? 0 : 1;
             $data['min_players'] = (is_null(request()->use_rosters)) ? 0 : request()->min_players;
             $data['max_players'] = (is_null(request()->use_rosters)) ? 0 : request()->max_players;

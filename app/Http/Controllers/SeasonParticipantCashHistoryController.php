@@ -383,7 +383,7 @@ class SeasonParticipantCashHistoryController extends Controller
                 event(new TableWasSaved($cash, $cash->description));
             }
 
-            $text = "\xF0\x9F\x92\xB2" . "Todos los equipos han <b>pagado</b> los salarios de los jugadores.\n";
+            $text = "\xF0\x9F\x92\xB2" . "Todos los equipos <b>desembolsan</b> el total de los salarios de sus jugadores.\n";
             $this->telegram_notification_channel($text);
 
             $season->salaries_paid = 1;

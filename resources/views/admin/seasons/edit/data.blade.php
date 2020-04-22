@@ -150,6 +150,16 @@
                 <input type="number" class="form-control" id="initial_budget" name="initial_budget" placeholder="Presupuesto inicial" autofocus value="{{ old('initial_budget', $season->initial_budget) }}">
             </div>
         </div>
+        <div class="form-group row salaries_paid {{ $season->use_economy ? 'd-block' : 'd-none'}}">
+            <div class="col-sm-9 offset-sm-3">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="salaries_paid" name="salaries_paid" {{ $season->salaries_paid ? 'checked = "checked"' : ''}}>
+                    <label class="custom-control-label is-valid" for="salaries_paid">
+                        <span>Salarios pagados</span>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group row">
             <div class="col-sm-12 border-top">
                 <div class="pt-3">

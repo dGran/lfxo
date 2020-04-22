@@ -39,9 +39,13 @@
             if( $('#use_economy').prop('checked') ) {
                 $(".initial_budget").removeClass('d-none');
                 $(".initial_budget").addClass('d-block');
+                $(".salaries_paid").removeClass('d-none');
+                $(".salaries_paid").addClass('d-block');
             } else {
                 $(".initial_budget").addClass('d-none');
                 $(".initial_budget").removeClass('d-block');
+                $(".salaries_paid").addClass('d-none');
+                $(".salaries_paid").removeClass('d-block');
             }
         });
 

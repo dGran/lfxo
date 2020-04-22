@@ -9,7 +9,7 @@ class Season extends Model
 	public $timestamps = false;
 
     protected $fillable = [
-        'name', 'slug', 'num_participants', 'participant_has_team', 'use_economy', 'use_rosters', 'players_db_id', 'min_players', 'max_players', 'initial_budget', 'salary_cap', 'free_players_salary', 'free_players_new_salary', 'free_players_cost', 'free_players_remuneration', 'max_clauses_paid', 'max_clauses_received', 'rules'
+        'name', 'slug', 'num_participants', 'participant_has_team', 'use_economy', 'use_rosters', 'players_db_id', 'min_players', 'max_players', 'initial_budget', 'salary_cap', 'free_players_salary', 'free_players_new_salary', 'free_players_cost', 'free_players_remuneration', 'max_clauses_paid', 'max_clauses_received', 'rules', 'salaries_paid'
     ];
 
 	public function scopeName($query, $name)
